@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- To automatically change text to other languages 
+you need to create a new values folder in res. The
+new values folder will be followed by a hyphen and 
+the ISO country code at the end of the directory name.
+Then copy over your strings.xml file. -->
+
+<resources>
+
+    <string name="app_name">App Recensement</string>
+    <string name="action_settings">Réglages</string>
+    <string name="contact_name_hint">Entrez le nom</string>
+    <string name="contact_phone_number_hint">Entrez le numéro de téléphone</string>
+    <string name="contact_street_hint">Entrez rue</string>
+    <string name="contact_city_hint">Saisissez votre ville</string>
+
+</resources>

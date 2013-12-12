@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/app_outer_margin" >
+
+    <EditText
+        android:id="@+id/contactNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/component_bottom_margin"
+        android:ems="10"
+        android:hint="@string/contact_name_hint"
+        android:inputType="textCapWords|textPersonName" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/contactStreetEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/component_bottom_margin"
+        android:ems="10"
+        android:hint="@string/contact_street_hint"
+        android:inputType="textPostalAddress" />
+
+    <EditText
+        android:id="@+id/contactCityEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/component_bottom_margin"
+        android:ems="10"
+        android:hint="@string/contact_city_hint"
+        android:inputType="textCapWords" />
+
+    <EditText
+        android:id="@+id/contactPhoneEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/component_bottom_margin"
+        android:ems="10"
+        android:hint="@string/contact_phone_hint"
+        android:inputType="phone" />
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <CheckBox
+            android:id="@+id/contactedCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_contacted_checkbox" />
+
+    </TableRow>
+
+</TableLayout>
+<!--
+A Fragment is sort of a mini Activity which you can add
+or remove from another Activity.
+ 
+You can use them to create reusable pieces you can add
+to your interface.
+
+They are often used so that depending on your screen size
+you can add more or less fragments 
+-->
