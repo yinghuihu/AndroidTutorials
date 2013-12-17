@@ -2,6 +2,7 @@ package com.chccc.hymn;
 
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 import com.chccc.hymn.R;
 
@@ -19,6 +20,8 @@ public class HymnMainActivity extends Activity {
 
 	public final static int MENU_HYMN_NUMBER = 1; 
 	
+	public final static int MENU_HYMN_NUMBER_MULTIPLE = 2; 
+	
 	TextView textViewHymn;
 	
 	@Override
@@ -28,9 +31,9 @@ public class HymnMainActivity extends Activity {
 		
 		textViewHymn = (TextView) findViewById(R.id.TextViewHymn);
 		
-		textViewHymn.setText(readHymn("002"));
+		textViewHymn.setText(readHymn("001"));
 		
-		textViewHymn.setTextSize(18);
+		textViewHymn.setTextSize(20);
 	}
 
 	@Override
@@ -39,13 +42,15 @@ public class HymnMainActivity extends Activity {
 		
 		menu.add(0, this.MENU_HYMN_NUMBER, 0, this.getString(R.string.menu_text_choose_hymn));
 		
+		menu.add(0, this.MENU_HYMN_NUMBER_MULTIPLE, 0, this.getString(R.string.menu_text_choose_hymn_multiple));
+		
 		return true;
 	}
 	
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		if (requestCode == 1) {
+		if (requestCode == MENU_HYMN_NUMBER) {
 
 			if (resultCode == RESULT_OK) {
 				String result = data.getStringExtra("result");
@@ -54,9 +59,25 @@ public class HymnMainActivity extends Activity {
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
 			}
+		} else if (requestCode == MENU_HYMN_NUMBER_MULTIPLE) {
+			if (resultCode == RESULT_OK) {
+				String result = data.getStringExtra("result");
+				
+				StringTokenizer st = new StringTokenizer(result, " ");
+				
+				String text = "";
+				while (st.hasMoreTokens()) {
+					text = text + "###" +readHymn(st.nextToken().trim());
+					text = text + "\n\n";
+				}
+				textViewHymn.setText(text);
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
 		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		
@@ -87,10 +108,11 @@ public class HymnMainActivity extends Activity {
 		switch (item.getItemId()){
 		case MENU_HYMN_NUMBER:
 			Intent intent = new Intent(this, HymnNumberActivity.class);
-			this.startActivityForResult(intent, 1);
+			this.startActivityForResult(intent, MENU_HYMN_NUMBER);
 			break;
-		case 2:
-			
+		case MENU_HYMN_NUMBER_MULTIPLE:
+			Intent intent2 = new Intent(this, HymnNumberMultipleActivity.class);
+			this.startActivityForResult(intent2, MENU_HYMN_NUMBER_MULTIPLE);
 		}
 		
 		return true;

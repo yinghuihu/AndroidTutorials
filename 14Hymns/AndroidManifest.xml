@@ -24,6 +24,10 @@
         </activity>
          <activity
             android:name="com.chccc.hymn.HymnNumberActivity" />
+         
+         <activity
+            android:name="com.chccc.hymn.HymnNumberMultipleActivity" />
     </application>
 
+    
 </manifest>
