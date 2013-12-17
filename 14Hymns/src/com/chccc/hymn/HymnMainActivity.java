@@ -28,19 +28,13 @@ public class HymnMainActivity extends Activity {
 		
 		textViewHymn = (TextView) findViewById(R.id.TextViewHymn);
 		
-//		Log.d("Ying", "I am here");
-
 		textViewHymn.setText(readHymn("002"));
-		
-//		Log.d("Ying", "I am here2");
 		
 		textViewHymn.setTextSize(18);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
 		
 		menu.add(0, this.MENU_HYMN_NUMBER, 0, this.getString(R.string.menu_text_choose_hymn));
@@ -54,7 +48,6 @@ public class HymnMainActivity extends Activity {
 		if (requestCode == 1) {
 
 			if (resultCode == RESULT_OK) {
-//				Log.d("Ying", "I am backhere");
 				String result = data.getStringExtra("result");
 				textViewHymn.setText(readHymn(result));
 			}
@@ -124,7 +117,6 @@ public class HymnMainActivity extends Activity {
 			}
 			is = this.getAssets().open("h" + hymnNumber + ".txt");
 
-			// Log.d("Ying", "I am here inside readhymn");
 
 			inputStreamString = new Scanner(is, "UTF-8").useDelimiter("\\A")
 					.next();
@@ -132,7 +124,6 @@ public class HymnMainActivity extends Activity {
 			is.close();
 
 		} catch (Exception em) {
-			// Log.d("Ying", em.getMessage());
 			em.printStackTrace();
 		}
 
