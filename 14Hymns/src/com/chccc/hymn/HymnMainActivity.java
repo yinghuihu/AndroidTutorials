@@ -3,7 +3,7 @@ package com.chccc.hymn;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import com.example.scrolltextbasic.R;
+import com.chccc.hymn.R;
 
 import android.os.Bundle;
 import android.app.Activity;
