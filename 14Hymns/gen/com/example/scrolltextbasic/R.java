@@ -39,6 +39,9 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
+        public static final int alert_dialog_notok_button_text=0x7f050008;
+        public static final int alert_dialog_ok_button_text=0x7f050007;
+        public static final int alert_dialog_title=0x7f050006;
         public static final int app_name=0x7f050000;
         public static final int menu_text_choose_hymn=0x7f050005;
         public static final int text_hymn_number_hint=0x7f050002;

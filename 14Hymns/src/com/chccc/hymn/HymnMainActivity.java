@@ -7,6 +7,8 @@ import com.example.scrolltextbasic.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -62,7 +64,29 @@ public class HymnMainActivity extends Activity {
 		}
 	}
 	
-	
+	@Override
+	public void onBackPressed() {
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    builder.setTitle(this.getString(R.string.alert_dialog_title));
+	    //builder.setMessage("Are You Sure?");
+
+	    builder.setPositiveButton(this.getString(R.string.alert_dialog_ok_button_text), new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int which) {
+	                    dialog.dismiss();
+	                    finish();
+	            }
+	        });
+
+	    builder.setNegativeButton(this.getString(R.string.alert_dialog_notok_button_text), new DialogInterface.OnClickListener() {
+	        @Override
+	        public void onClick(DialogInterface dialog, int which) {
+	            dialog.dismiss();
+	        }
+	    });
+	    AlertDialog alert = builder.create();
+	    alert.show();
+	}
 	
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
