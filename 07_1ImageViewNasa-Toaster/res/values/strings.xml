@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Nasa Daily Image</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="test_image_title">test titel</string>
+    <string name="test_image_date">asfdsf</string>
+    <string name="test_image_description">sdfsdf</string>
+
+</resources>
