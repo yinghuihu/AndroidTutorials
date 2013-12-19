@@ -45,28 +45,28 @@ public class MainActivity extends Activity {
 		
 		imageView = (ImageView)findViewById(R.id.imageDisplay);
 		
-		Thread thread = new Thread(new Runnable(){
-		    @Override
-		    public void run() {
-		        try {
-		        	HttpURLConnection connection = (HttpURLConnection)new URL("http://www.windsim.com/images/sky/sky_107.bmp").openConnection();
-					
-					connection.setDoInput(true);
-					
-					connection.connect();
-					
-					InputStream input = connection.getInputStream();
-					
-					Bitmap bitmap = BitmapFactory.decodeStream(input);
-					imageView.setImageBitmap(bitmap);
-					input.close();
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
-		    }
-		});
-
-		thread.start(); 
+//		Thread thread = new Thread(new Runnable(){
+//		    @Override
+//		    public void run() {
+//		        try {
+//		        	HttpURLConnection connection = (HttpURLConnection)new URL("http://www.windsim.com/images/sky/sky_107.bmp").openConnection();
+//					
+//					connection.setDoInput(true);
+//					
+//					connection.connect();
+//					
+//					InputStream input = connection.getInputStream();
+//					
+//					Bitmap bitmap = BitmapFactory.decodeStream(input);
+//					imageView.setImageBitmap(bitmap);
+//					input.close();
+//		        } catch (Exception e) {
+//		            e.printStackTrace();
+//		        }
+//		    }
+//		});
+//
+//		thread.start(); 
 		
 //		if (android.os.Build.VERSION.SDK_INT > 9) {
 //	        StrictMode.ThreadPolicy policy = 
