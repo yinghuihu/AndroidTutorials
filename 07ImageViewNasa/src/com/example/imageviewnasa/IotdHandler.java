@@ -1,9 +1,11 @@
 package com.example.imageviewnasa;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -16,6 +18,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 public class IotdHandler extends DefaultHandler {
 	private String url = "http://www.nasa.gov/rss/image_of_the_day.rss";
@@ -40,7 +43,7 @@ public class IotdHandler extends DefaultHandler {
 				"&gt; Video: Jewel Box Sun" +
 				"Image Credit: NASA Goddard Space Flight Center";
 		
-//		image  = getBitmap ("http://www.windsim.com/images/sky/sky_107.bmp");
+		image  = getImageBitmap ("http://www.windsim.com/images/sky/sky_107.bmp");
 //		try {
 //			SAXParserFactory factory =
 //			SAXParserFactory.newInstance();
@@ -93,6 +96,26 @@ public class IotdHandler extends DefaultHandler {
 			return bitmap;
 		} catch (IOException ioe) { return null; }
 	}
+	
+	private Bitmap getImageBitmap(String url) {
+        Bitmap bm = null;
+        try {
+            URL aURL = new URL(url);
+            Log.d("YING", "I am here 53");
+            URLConnection conn = aURL.openConnection();
+            conn.connect();
+            Log.d("YING", "I am here 6");
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
+            bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            is.close();
+            Log.d("YING", "I am here 4");
+       } catch (Exception ie) {
+           Log.e("YING", "Error getting bitmap", ie);
+       }
+       return bm;
+    } 
 
 //	public void characters(char ch[], int start, int length) {
 //		String chars = new String(ch).substring(start, start + length);
