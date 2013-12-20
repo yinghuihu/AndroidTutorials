@@ -13,4 +13,6 @@
     <string name="alert_dialog_title">退出生命圣诗应用</string>
     <string name="alert_dialog_ok_button_text">是</string>
     <string name="alert_dialog_notok_button_text">否</string>
+    
+    <string name="color_hymn_header">#C0C0C0</string>
 </resources>

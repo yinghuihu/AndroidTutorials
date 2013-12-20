@@ -1,6 +1,9 @@
 package com.chccc.hymn;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -11,29 +14,38 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class HymnMainActivity extends Activity {
 
 	public final static int MENU_HYMN_NUMBER = 1; 
 	
-	public final static int MENU_HYMN_NUMBER_MULTIPLE = 2; 
+	public final static int MENU_HYMN_NUMBER_MULTIPLE = 2;
 	
-	TextView textViewHymn;
+	private static int fontSize = 18; 
+	
+
+	public static void setFontSize(int fontSize) {
+		HymnMainActivity.fontSize = fontSize;
+	}
+
+	//	TextView textViewHymn;
+	LinearLayout hymnContainer ;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hymn_activity_main);
 		
-		textViewHymn = (TextView) findViewById(R.id.TextViewHymn);
-		
-		textViewHymn.setText(readHymn("001"));
-		
-		textViewHymn.setTextSize(20);
+		hymnContainer = (LinearLayout) findViewById(R.id.hymnContainer );
+		readHymn("001", hymnContainer);
 	}
 
 	@Override
@@ -54,7 +66,9 @@ public class HymnMainActivity extends Activity {
 
 			if (resultCode == RESULT_OK) {
 				String result = data.getStringExtra("result");
-				textViewHymn.setText(readHymn(result));
+				hymnContainer.removeAllViews();
+				readHymn (result, hymnContainer);
+				
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
@@ -62,15 +76,14 @@ public class HymnMainActivity extends Activity {
 		} else if (requestCode == MENU_HYMN_NUMBER_MULTIPLE) {
 			if (resultCode == RESULT_OK) {
 				String result = data.getStringExtra("result");
+				hymnContainer.removeAllViews();
 				
 				StringTokenizer st = new StringTokenizer(result, " ");
 				
 				String text = "";
 				while (st.hasMoreTokens()) {
-					text = text + "###" +readHymn(st.nextToken().trim());
-					text = text + "\n\n";
+					readHymn (st.nextToken(), hymnContainer);
 				}
-				textViewHymn.setText(text);
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
@@ -118,19 +131,28 @@ public class HymnMainActivity extends Activity {
 		return true;
 	}
 
-	private String readHymn(String hymnNumber) {
+	private void readHymn(String hymnNumber, View v) {
 		InputStream is = null;
-		String inputStreamString = null;
+		String inputStreamString = "";
 
 		try {
 			int number = Integer.parseInt(hymnNumber);
 
 			if (number > 536) {
-				return this.getString(R.string.text_hymn_number_max_number);
+				TextView textViewHymn = new TextView(this);
+				
+				textViewHymn.setTextSize(fontSize);
+				textViewHymn.setText(R.string.text_hymn_number_max_number);
+				hymnContainer.addView(textViewHymn);
+				
 			}
 
 		} catch (Exception e) {
-			return this.getString(R.string.text_hymn_number_non_number);
+			TextView textViewHymn = new TextView(this);
+			
+			textViewHymn.setTextSize(fontSize);
+			textViewHymn.setText(R.string.text_hymn_number_non_number);
+			hymnContainer.addView(textViewHymn);
 		}
 
 		try {
@@ -138,10 +160,37 @@ public class HymnMainActivity extends Activity {
 				hymnNumber = "0" + hymnNumber;
 			}
 			is = this.getAssets().open("h" + hymnNumber + ".txt");
+			
+			BufferedReader input = new BufferedReader(new InputStreamReader(is));
 
-
-			inputStreamString = new Scanner(is, "UTF-8").useDelimiter("\\A")
-					.next();
+			int i = 1;
+			try {
+				String line = null; 
+				while ((line = input.readLine()) != null ) {
+					if (i==1) {
+						TextView textViewHymnHeader = new TextView(this);
+						
+						textViewHymnHeader.setTextSize(30);
+						textViewHymnHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
+//						textViewHymnHeader.setTypeface(null, Typeface.BOLD);
+						textViewHymnHeader.setText(line);
+						
+						hymnContainer.addView(textViewHymnHeader);
+						i++;
+					} else if (i==2){
+						TextView textViewHymnSubHeader = new TextView(this);
+						textViewHymnSubHeader.setTextSize(fontSize);
+						textViewHymnSubHeader.setText(line);
+						textViewHymnSubHeader.setTypeface(null, Typeface.BOLD);
+						hymnContainer.addView(textViewHymnSubHeader);
+						i++;
+					} else {
+						inputStreamString = inputStreamString + line + "\n";
+					}
+				}
+			} catch(Exception ie) {
+				
+			}
 
 			is.close();
 
@@ -149,6 +198,11 @@ public class HymnMainActivity extends Activity {
 			em.printStackTrace();
 		}
 
-		return inputStreamString;
+		TextView textViewHymn = new TextView(this);
+		
+		textViewHymn.setTextSize(fontSize);
+		textViewHymn.setText(inputStreamString);
+		hymnContainer.addView(textViewHymn);
+		
 	}
 }
