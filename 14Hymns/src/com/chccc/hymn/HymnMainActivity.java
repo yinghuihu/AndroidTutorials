@@ -200,8 +200,10 @@ public class HymnMainActivity extends Activity {
 
 		TextView textViewHymn = new TextView(this);
 		
-		textViewHymn.setTextSize(fontSize);
+		textViewHymn.setTextSize(fontSize +4);
 		textViewHymn.setText(inputStreamString);
+		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
+		textViewHymn.setTypeface(face);
 		hymnContainer.addView(textViewHymn);
 		
 	}
