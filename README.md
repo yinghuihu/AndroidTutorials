@@ -19,3 +19,12 @@ This contains the tutorial projects for the android development
 4. emulator needs to be configured. 
 5. 
 
+
+
+
+
+Useful resources:
+================
+
+Icon generator
+http://android-ui-utils.googlecode.com/hg/asset-studio/dist/index.html
