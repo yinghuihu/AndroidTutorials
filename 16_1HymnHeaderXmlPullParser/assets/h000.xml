@@ -1,0 +1,26 @@
+<Hymns>
+	<Hymn>
+		<Number>001</Number>
+		<Title>榮耀頌</Title>
+		<Caption>詩集：生命聖詩，1</Caption>
+		<SearchString>a</SearchString>
+	</Hymn>
+	<Hymn>
+		<Number>002</Number>
+		<Title>榮耀頌</Title>
+		<Caption>詩集：生命聖詩，2</Caption>
+		<SearchString>a</SearchString>
+	</Hymn>
+	<Hymn>
+		<Number>003</Number>
+		<Title>求大君王來臨</Title>
+		<Caption>詩集：生命聖詩，3</Caption>
+		<SearchString>a</SearchString>
+	</Hymn>
+	<Hymn>
+		<Number>004</Number>
+		<Title>榮耀三一神</Title>
+		<Caption>詩集：生命聖詩，4</Caption>
+		<SearchString>a</SearchString>
+	</Hymn>
+</Hymns>
