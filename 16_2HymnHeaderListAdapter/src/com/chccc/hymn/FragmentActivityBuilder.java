@@ -52,8 +52,8 @@ public abstract class FragmentActivityBuilder extends FragmentActivity{
 			// the Fragment itself.
 
 			fragManager.beginTransaction()
-			.add(R.id.fragmentContainer, theFragment)
-			.commit();
+				.add(R.id.fragmentContainer, theFragment)
+				.commit();
 
 		}
 

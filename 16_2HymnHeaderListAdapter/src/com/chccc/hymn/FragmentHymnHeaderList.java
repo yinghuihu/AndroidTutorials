@@ -2,11 +2,13 @@ package com.chccc.hymn;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 // The ListFragment displays a list of items in a 
@@ -15,8 +17,7 @@ import android.widget.TextView;
 
 public class FragmentHymnHeaderList extends ListFragment {
 	
-	// Stores the list of Contacts
-	
+	public static final String HYMN_HEADER_NUMBER = "com.chccc.hymn.header.number";
 	private ArrayList<HymnHeader> hhl;
 
 	@Override
@@ -39,29 +40,29 @@ public class FragmentHymnHeaderList extends ListFragment {
 		
 	}
 	
-//	@Override
-//	public void onListItemClick(ListView l, View v, int position, long id) {
-//		
-//		Contact clickedContact = ((ContactAdapter) getListAdapter()).getItem(position);
-//		
-//		// NEW
-//		// We want our ContactViewPager to be called now if they click 
-//		// on a Contact
-//		
-//		// Intent newIntent = new Intent(getActivity(), CensusApp.class);
-//		
-//		// startActivityForResult(newIntent, 0);
-//		
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		
+		HymnHeader clickedHymnHeader = ((HymnHeaderAdapter) getListAdapter()).getItem(position);
+		
+		// NEW
+		// We want our ContactViewPager to be called now if they click 
+		// on a Contact
+		
+		Intent newIntent = new Intent(getActivity(), HymnMainActivity.class);
+		
+//		startActivityForResult(newIntent, 0);
+		
 //		Intent newIntent = new Intent(getActivity(), ContactViewPager.class);
+		
+		newIntent.putExtra(HYMN_HEADER_NUMBER, clickedHymnHeader.getNumber());
 //		
-//		newIntent.putExtra(ContactFragment.CONTACT_ID, clickedContact.getIdNumber());
-//		
-//		startActivity(newIntent);
-//		
-//		// END OF NEW
-//		
-//	}
-//
+		startActivity(newIntent);
+		
+		// END OF NEW
+		
+	}
+
 //	@Override
 //	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //		
