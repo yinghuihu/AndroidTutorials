@@ -31,6 +31,3 @@ http://android-ui-utils.googlecode.com/hg/asset-studio/dist/index.html
 
 
 
-test
-================
-test checkin
