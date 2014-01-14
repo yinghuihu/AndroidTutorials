@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -43,7 +44,7 @@ public class BibleMainActivity extends Activity {
 		setContentView(R.layout.bible_activity_main);
 		
 		bibleContainer = (LinearLayout) findViewById(R.id.bibleContainer );
-		readBible("hhb", "40", "01", bibleContainer);
+		readBible("hhb", "40", "27", bibleContainer);
 	}
 
 	@Override
@@ -130,59 +131,30 @@ public class BibleMainActivity extends Activity {
 //	}
 
 	private void readBible(String version, String bookNumber, String chapterNumber, View v) {
-		InputStream is = null;
-		String inputStreamString = "";
-
-		try {
-//			while (hymnNumber.length() < 3) {
-//				hymnNumber = "0" + hymnNumber;
-//			}
-			is = this.getAssets().open("data/hhb/hhb66.xml");
-			
-			BufferedReader input = new BufferedReader(new InputStreamReader(is));
-
-			int i = 1;
-			try {
-				String line = null; 
-				while ((line = input.readLine()) != null ) {
-					if (i==1) {
-						TextView textViewHymnHeader = new TextView(this);
-						
-						textViewHymnHeader.setTextSize(30);
-						textViewHymnHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
-//						textViewHymnHeader.setTypeface(null, Typeface.BOLD);
-						textViewHymnHeader.setText(line);
-						
-						bibleContainer.addView(textViewHymnHeader);
-						i++;
-					} else if (i==2){
-						TextView textViewHymnSubHeader = new TextView(this);
-						textViewHymnSubHeader.setTextSize(fontSize);
-						textViewHymnSubHeader.setText(line);
-						textViewHymnSubHeader.setTypeface(null, Typeface.BOLD);
-						bibleContainer.addView(textViewHymnSubHeader);
-						i++;
-					} else {
-						inputStreamString = inputStreamString + line + "\n";
-					}
-				}
-			} catch(Exception ie) {
-				
-			}
-
-			is.close();
-
-		} catch (Exception em) {
-			em.printStackTrace();
+		
+		ChapterDO chapter = ChapterXmlParser.getChapterContent(getApplicationContext(), version, bookNumber, chapterNumber);
+		
+		TextView textViewBookHeader = new TextView(this);
+		textViewBookHeader.setTextSize(30);
+		textViewBookHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
+//		textViewBookHeader.setTypeface(null, Typeface.BOLD);
+		textViewBookHeader.setText(chapter.getBookChineseName() + " " + chapterNumber);
+		bibleContainer.addView(textViewBookHeader);
+		
+		String chapterContent = "";
+		
+		ArrayList<String> verses = chapter.getVerses();
+		
+		for (String verse: verses) {
+			chapterContent = chapterContent + verse;
 		}
-
-		TextView textViewHymn = new TextView(this);
 		
-		textViewHymn.setTextSize(fontSize +4);
-		textViewHymn.setText(inputStreamString);
+		
+		TextView textChapterContent = new TextView(this);
+		textChapterContent.setTextSize(fontSize +4);
+		textChapterContent.setText(chapterContent);
 		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
-		textViewHymn.setTypeface(face);
-		bibleContainer.addView(textViewHymn);
-		
+		textChapterContent.setTypeface(face);
+		bibleContainer.addView(textChapterContent);
 	}
 }
