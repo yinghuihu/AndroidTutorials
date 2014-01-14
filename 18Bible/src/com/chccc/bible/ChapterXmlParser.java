@@ -48,7 +48,7 @@ public class ChapterXmlParser {
 				String englishName = bookElement.getAttribute("englishName");
 				String chaptersCount = bookElement.getAttribute("chapters");
 				
-				
+				NodeList chapterNodeList = bookElement.getElementsByTagName("Chapter");
 			}
 
 			for (int i = 0; i < bookNodeList.getLength(); i++) {
