@@ -35,15 +35,15 @@ public class BibleMainActivity extends Activity {
 	}
 
 	//	TextView textViewHymn;
-	LinearLayout hymnContainer ;
+	LinearLayout bibleContainer ;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bible_activity_main);
 		
-		hymnContainer = (LinearLayout) findViewById(R.id.hymnContainer );
-		readHymn("001", hymnContainer);
+		bibleContainer = (LinearLayout) findViewById(R.id.bibleContainer );
+		readBible("hhb", "40", "01", bibleContainer);
 	}
 
 	@Override
@@ -129,35 +129,15 @@ public class BibleMainActivity extends Activity {
 //		return true;
 //	}
 
-	private void readHymn(String hymnNumber, View v) {
+	private void readBible(String version, String bookNumber, String chapterNumber, View v) {
 		InputStream is = null;
 		String inputStreamString = "";
 
 		try {
-			int number = Integer.parseInt(hymnNumber);
-
-			if (number > 536) {
-				TextView textViewHymn = new TextView(this);
-				
-				textViewHymn.setTextSize(fontSize);
-				textViewHymn.setText(R.string.text_hymn_number_max_number);
-				hymnContainer.addView(textViewHymn);
-				
-			}
-
-		} catch (Exception e) {
-			TextView textViewHymn = new TextView(this);
-			
-			textViewHymn.setTextSize(fontSize);
-			textViewHymn.setText(R.string.text_hymn_number_non_number);
-			hymnContainer.addView(textViewHymn);
-		}
-
-		try {
-			while (hymnNumber.length() < 3) {
-				hymnNumber = "0" + hymnNumber;
-			}
-			is = this.getAssets().open("h" + hymnNumber + ".txt");
+//			while (hymnNumber.length() < 3) {
+//				hymnNumber = "0" + hymnNumber;
+//			}
+			is = this.getAssets().open("data/hhb/hhb66.xml");
 			
 			BufferedReader input = new BufferedReader(new InputStreamReader(is));
 
@@ -173,14 +153,14 @@ public class BibleMainActivity extends Activity {
 //						textViewHymnHeader.setTypeface(null, Typeface.BOLD);
 						textViewHymnHeader.setText(line);
 						
-						hymnContainer.addView(textViewHymnHeader);
+						bibleContainer.addView(textViewHymnHeader);
 						i++;
 					} else if (i==2){
 						TextView textViewHymnSubHeader = new TextView(this);
 						textViewHymnSubHeader.setTextSize(fontSize);
 						textViewHymnSubHeader.setText(line);
 						textViewHymnSubHeader.setTypeface(null, Typeface.BOLD);
-						hymnContainer.addView(textViewHymnSubHeader);
+						bibleContainer.addView(textViewHymnSubHeader);
 						i++;
 					} else {
 						inputStreamString = inputStreamString + line + "\n";
@@ -202,7 +182,7 @@ public class BibleMainActivity extends Activity {
 		textViewHymn.setText(inputStreamString);
 		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
 		textViewHymn.setTypeface(face);
-		hymnContainer.addView(textViewHymn);
+		bibleContainer.addView(textViewHymn);
 		
 	}
 }
