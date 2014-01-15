@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import com.chccc.bible.dto.ChapterDTO;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -67,7 +69,7 @@ public class BibleMainActivity extends Activity {
 				String result = data.getStringExtra("result");
 				bibleContainer.removeAllViews();
 				
-				StringTokenizer st = new StringTokenizer(result, "|");
+				StringTokenizer st = new StringTokenizer(result, " ");
 				String bookNumber="";
 				String chapterNumber = "";
 
@@ -139,7 +141,8 @@ public class BibleMainActivity extends Activity {
 		switch (item.getItemId()){
 		case MENU_BIBLE_CHAPTER:
 			Intent intent = new Intent(this, BibleChapterChooserActivity.class);
-			this.startActivityForResult(intent, MENU_BIBLE_CHAPTER);
+			this.startActivity(intent);
+//			this.startActivityForResult(intent, MENU_BIBLE_CHAPTER);
 			break;
 //		case MENU_HYMN_NUMBER_MULTIPLE:
 //			Intent intent2 = new Intent(this, BibleNumberMultipleActivity.class);
@@ -152,7 +155,7 @@ public class BibleMainActivity extends Activity {
 
 	private void readBible(String version, String bookNumber, String chapterNumber) {
 		
-		ChapterDO chapter = ChapterXmlParser.getChapterContent(getApplicationContext(), version, bookNumber, chapterNumber);
+		ChapterDTO chapter = ChapterXmlParser.getChapterContent(getApplicationContext(), version, bookNumber, chapterNumber);
 		
 		TextView textViewBookHeader = new TextView(this);
 		textViewBookHeader.setTextSize(30);

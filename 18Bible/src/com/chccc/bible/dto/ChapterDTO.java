@@ -1,4 +1,4 @@
-package com.chccc.bible;
+package com.chccc.bible.dto;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import org.xml.sax.InputSource;
 import android.content.Context;
 
 
-public class ChapterDO {
+public class ChapterDTO {
 	
 	private String chapterCount;
 	

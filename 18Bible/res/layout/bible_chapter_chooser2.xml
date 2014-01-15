@@ -1,0 +1,80 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+ 
+   
+    <!-- <TableRow> 
+        <EditText
+	        android:id="@+id/textHymnNumber"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:ems="10"
+	        android:hint="@string/text_hymn_number_hint"
+	        android:inputType="text" >
+	
+	        <requestFocus />
+	    </EditText>
+
+	    <Button
+	        android:id="@+id/buttonHymnNumberSave"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:text="跳转" />
+	</TableRow>
+	 <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20px"
+            android:text="Write character"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="10dip"></TextView>
+    </TableRow>       -->
+    <TableRow>
+ 		<com.chccc.bible.chapterChooser.CustomAutoCompleteView
+	        android:id="@+id/toNumber"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:textColor="#000000"
+            android:textColorHighlight="#000000"
+            android:textColorLink="#000000"
+            android:textStyle="bold"
+            android:width="250dip" >
+	    </com.chccc.bible.chapterChooser.CustomAutoCompleteView>
+    </TableRow>
+    
+     <TableRow> 
+        <EditText
+	        android:id="@+id/textHymnNumber"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:ems="10"
+	        android:hint="@string/text_hymn_number_hint"
+	        android:inputType="text" >
+	
+	        <requestFocus />
+	    </EditText>
+
+	    <Button
+	        android:id="@+id/buttonHymnNumberSave"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:text="跳转" />
+	</TableRow>
+	 <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20px"
+            android:text="Write character"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="10dip"></TextView>
+    </TableRow>
+</TableLayout>

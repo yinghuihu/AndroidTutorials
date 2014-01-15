@@ -11,15 +11,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import com.chccc.bible.dto.ChapterDTO;
+
 import android.content.Context;
 
 
 public class ChapterXmlParser {
 	
-	public static ChapterDO getChapterContent(Context applicationContext, String bookVersion, String bookNumber, String chapterNumber) {
+	public static ChapterDTO getChapterContent(Context applicationContext, String bookVersion, String bookNumber, String chapterNumber) {
 		ArrayList<String> lines = new ArrayList();
 		
-		ChapterDO chapter = new ChapterDO();
+		ChapterDTO chapter = new ChapterDTO();
 		
 		try {
 			InputStream is = null;
