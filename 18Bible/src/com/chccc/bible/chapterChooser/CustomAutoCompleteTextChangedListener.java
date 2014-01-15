@@ -45,7 +45,7 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher{
             mainActivity.adapter.notifyDataSetChanged();
             
             // get suggestions from the database
-            BookDTO[] books = mainActivity.bookH.read(userInput.toString());
+            BookDTO[] books = mainActivity.bookHandler.read(userInput.toString());
             
             // update the adapter
             mainActivity.adapter = new AutocompleteCustomArrayAdapter(mainActivity, R.layout.list_view_row, books);

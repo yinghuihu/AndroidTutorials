@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import com.chccc.bible.dto.ChapterDTO;
+import com.chccc.bible.util.BibleMainActivityPreferences;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -27,6 +28,8 @@ import android.widget.TextView;
 public class BibleMainActivity extends Activity {
 
 	public final static int MENU_BIBLE_CHAPTER = 1; 
+	
+	public static BibleMainActivityPreferences preferences;
 //	
 //	public final static int MENU_HYMN_NUMBER_MULTIPLE = 2;
 	
@@ -46,7 +49,8 @@ public class BibleMainActivity extends Activity {
 		setContentView(R.layout.bible_activity_main);
 		
 		bibleContainer = (LinearLayout) findViewById(R.id.bibleContainer );
-		readBible("hhb", "40", "27");
+		
+		readBible();
 	}
 
 	@Override
@@ -85,7 +89,7 @@ public class BibleMainActivity extends Activity {
 					chapterNumber = st.nextToken();
 				}
 					
-				readBible("hhb", bookNumber, chapterNumber);
+				readBible();
 				
 			}
 			if (resultCode == RESULT_CANCELED) {
@@ -153,7 +157,12 @@ public class BibleMainActivity extends Activity {
 		return true;
 	}
 
-	private void readBible(String version, String bookNumber, String chapterNumber) {
+	private void readBible() {
+		preferences = new BibleMainActivityPreferences(this);
+		
+		String version = preferences.getBibleVersion();
+		String bookNumber = preferences.getBookNumber();
+		String chapterNumber = preferences.getChapterNumber();
 		
 		ChapterDTO chapter = ChapterXmlParser.getChapterContent(getApplicationContext(), version, bookNumber, chapterNumber);
 		
