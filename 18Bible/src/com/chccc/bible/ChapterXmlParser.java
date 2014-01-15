@@ -41,6 +41,9 @@ public class ChapterXmlParser {
 				chapter.setBookEnglishName(bookElement.getAttribute("englishName"));
 				chapter.setChapterCount(bookElement.getAttribute("chapters"));
 				
+				BibleMainActivity.preferences.setBookTotalChapter(chapter.getChapterCount());
+				BibleMainActivity.preferences.commit();
+				
 				NodeList chapterNodeList = bookElement.getElementsByTagName("Chapter");
 				
 				for (int i = 0; i < chapterNodeList.getLength(); i++) {

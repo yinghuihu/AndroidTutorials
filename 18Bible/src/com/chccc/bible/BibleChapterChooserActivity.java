@@ -23,8 +23,8 @@ import com.chccc.bible.chapterChooser.CustomAutoCompleteTextChangedListener;
 import com.chccc.bible.chapterChooser.AutocompleteCustomArrayAdapter;
 
 public class BibleChapterChooserActivity extends Activity {
-	Button buttonHymnNumberSave;
-	EditText textHymnNumber;
+	Button buttonChapterChooserSave;
+	EditText textChapterChooserChapterNumber;
 	
 	public AutoCompleteTextView textView = null;
 	public ArrayAdapter<BookDTO> adapter;
@@ -46,7 +46,7 @@ public class BibleChapterChooserActivity extends Activity {
 		bookHandler.insertBookData();
 		
 		BookDTO[] books = new BookDTO[0];
-		textView = (CustomAutoCompleteView) findViewById(R.id.toNumber);
+		textView = (CustomAutoCompleteView) findViewById(R.id.bookJumpNumber);
 		 
 		textView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
 		
@@ -58,13 +58,6 @@ public class BibleChapterChooserActivity extends Activity {
                 RelativeLayout rl = (RelativeLayout) arg1;
                 TextView tv = (TextView) rl.getChildAt(0);
                 textView.setText(tv.getText().toString());
-                
-                BibleMainActivity.preferences.setBibleVersion("niv");
-                BibleMainActivity.preferences.setBookNumber("40");
-                BibleMainActivity.preferences.setChapterNumber("1");
-                
-               
-                
             }
 
         });
@@ -75,19 +68,22 @@ public class BibleChapterChooserActivity extends Activity {
 		 //	Set adapter to AutoCompleteTextView
 		 textView.setAdapter(adapter);
 		 
-		buttonHymnNumberSave = (Button) findViewById(R.id.buttonHymnNumberSave);
-		textHymnNumber = (EditText)findViewById(R.id.textHymnNumber);
+		 buttonChapterChooserSave = (Button) findViewById(R.id.buttonChapterChooserSave);
+		textChapterChooserChapterNumber = (EditText)findViewById(R.id.textChapterChooserChapterNumber);
 		
-		buttonHymnNumberSave.setOnClickListener(new OnClickListener(){
+		buttonChapterChooserSave.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View arg0) {
 //				Intent returnIntent = new Intent();
 //				returnIntent.putExtra("result", textHymnNumber.getText().toString());
 //				setResult(RESULT_OK, returnIntent);
-				BibleMainActivity.preferences.setBibleVersion("niv");
-                BibleMainActivity.preferences.setBookNumber("40");
-                BibleMainActivity.preferences.setChapterNumber("1");
+				
+				BookDTO book = sef.bookHandler.getBook(textView.getText().toString());
+				
+				BibleMainActivity.preferences.setBibleVersion("hhb");
+                BibleMainActivity.preferences.setBookNumber(book.getNumber());
+                BibleMainActivity.preferences.setChapterNumber(textChapterChooserChapterNumber.getText().toString());
                 BibleMainActivity.preferences.commit();
 				Intent intent = new Intent(sef, BibleMainActivity.class);
 	    		startActivity(intent);

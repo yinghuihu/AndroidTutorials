@@ -14,6 +14,8 @@ public class BibleMainActivityPreferences {
 	private String bookNumber = "";
 	private String chapterNumber = "";
 	
+	private String bookTotalChapter = "";
+	
 	private String theme = "";
 	
 	private BibleMainActivity bibleMainActivity;
@@ -66,6 +68,14 @@ public class BibleMainActivityPreferences {
 		editor.putString("theme", theme);
 	}
 	
+	public String getBookTotalChapter() {
+		return settings.getString("bookTotalChapter", bookTotalChapter);
+	}
+
+	public void setBookTotalChapter(String bookTotalChapter) {
+		editor.putString("bookTotalChapter", bookTotalChapter);
+	}
+
 	public void commit() {
 		editor.commit();
 	}

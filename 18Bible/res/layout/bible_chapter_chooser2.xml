@@ -35,7 +35,7 @@
     </TableRow>       -->
     <TableRow>
  		<com.chccc.bible.chapterChooser.CustomAutoCompleteView
-	        android:id="@+id/toNumber"
+	        android:id="@+id/bookJumpNumber"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
@@ -50,19 +50,19 @@
     
      <TableRow> 
         <EditText
-	        android:id="@+id/textHymnNumber"
+	        android:id="@+id/textChapterChooserChapterNumber"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="@dimen/activity_vertical_margin"
 	        android:ems="10"
-	        android:hint="@string/text_hymn_number_hint"
+	        android:hint="@string/text_chapter_number_input"
 	        android:inputType="text" >
 	
 	        <requestFocus />
 	    </EditText>
 
 	    <Button
-	        android:id="@+id/buttonHymnNumberSave"
+	        android:id="@+id/buttonChapterChooserSave"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="@dimen/activity_vertical_margin"

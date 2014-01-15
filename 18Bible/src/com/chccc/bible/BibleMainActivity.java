@@ -1,12 +1,6 @@
 package com.chccc.bible;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
 import com.chccc.bible.dto.ChapterDTO;
 import com.chccc.bible.util.BibleMainActivityPreferences;
@@ -18,29 +12,29 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BibleMainActivity extends Activity {
-
-	public final static int MENU_BIBLE_CHAPTER = 1; 
 	
 	public static BibleMainActivityPreferences preferences;
-//	
-//	public final static int MENU_HYMN_NUMBER_MULTIPLE = 2;
+	
+	public final static int MENU_BIBLE_CHAPTER = 1; 
+	public final static int MENU_BIBLE_VERSION_HHB = 8;
+	public final static int MENU_BIBLE_VERSION_NIV= 9;
+	
+	public final static int MENU_BIBLE_NEXT_CHAPTER = 10;
+	public final static int MENU_BIBLE_PREVIOUS_CHAPTER = 11;
 	
 	private static int fontSize = 18; 
-	
 
 	public static void setFontSize(int fontSize) {
 		BibleMainActivity.fontSize = fontSize;
 	}
 
-	//	TextView textViewHymn;
 	LinearLayout bibleContainer ;
 	
 	@Override
@@ -58,69 +52,83 @@ public class BibleMainActivity extends Activity {
 		super.onCreateOptionsMenu(menu);
 		
 		menu.add(0, this.MENU_BIBLE_CHAPTER, 0, this.getString(R.string.menu_text_choose_bible));
-//		
-//		menu.add(0, this.MENU_HYMN_NUMBER_MULTIPLE, 0, this.getString(R.string.menu_text_choose_hymn_multiple));
+
+		menu.add(0, this.MENU_BIBLE_PREVIOUS_CHAPTER, 0, this.getString(R.string.menu_text_previous_chapter));
+		menu.add(0, this.MENU_BIBLE_NEXT_CHAPTER, 0, this.getString(R.string.menu_text_next_chapter));
+		
+		menu.add(0, this.MENU_BIBLE_VERSION_HHB, 0, this.getString(R.string.menu_text_bible_version_hhb));
+		menu.add(0, this.MENU_BIBLE_VERSION_NIV, 0, this.getString(R.string.menu_text_bible_version_niv));
 		
 		return true;
 	}
 	
 	
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-		if (requestCode == MENU_BIBLE_CHAPTER) {
-
-			if (resultCode == RESULT_OK) {
-				String result = data.getStringExtra("result");
-				bibleContainer.removeAllViews();
-				
-				StringTokenizer st = new StringTokenizer(result, " ");
-				String bookNumber="";
-				String chapterNumber = "";
-
-//				if (st.hasMoreTokens()) {
-//					bookNumber = st.nextToken();
-//				}
-
-				if (st.hasMoreTokens()) {
-					bookNumber = st.nextToken();
-				}
-				
-				if (st.hasMoreTokens()) {
-					chapterNumber = st.nextToken();
-				}
-					
-				readBible();
-				
-			}
-			if (resultCode == RESULT_CANCELED) {
-				// Write your code if there's no result
-			}
-		} 
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		super.onMenuItemSelected(featureId, item);
 		
-//		else if (requestCode == MENU_HYMN_NUMBER_MULTIPLE) {
-//			if (resultCode == RESULT_OK) {
-//				String result = data.getStringExtra("result");
-//				hymnContainer.removeAllViews();
-//				
-//				StringTokenizer st = new StringTokenizer(result, " ");
-//				
-//				String text = "";
-//				while (st.hasMoreTokens()) {
-//					readHymn (st.nextToken(), hymnContainer);
-//				}
-//			}
-//			if (resultCode == RESULT_CANCELED) {
-//				// Write your code if there's no result
-//			}
-//		}
+		int currentChapterNumber = 0;
+		
+		switch (item.getItemId()){
+		
+		case MENU_BIBLE_CHAPTER:
+			Intent intent = new Intent(this, BibleChapterChooserActivity.class);
+			this.startActivity(intent);
+			break;
+		case MENU_BIBLE_PREVIOUS_CHAPTER:
+			
+			currentChapterNumber = Integer.parseInt(preferences.getChapterNumber());
+			
+			if (currentChapterNumber != 1) {
+				currentChapterNumber--;
+				
+				preferences.setChapterNumber("" + currentChapterNumber);
+				preferences.commit();
+				readBible();
+			} else {
+				Toast.makeText(getApplicationContext(), R.string.alert_first_chapter_already, Toast.LENGTH_SHORT).show();
+			}
+			
+			break;
+		case MENU_BIBLE_NEXT_CHAPTER:
+			
+			currentChapterNumber = Integer.parseInt(preferences.getChapterNumber());
+			
+			int bookTotalChapterCount = Integer.parseInt(preferences.getBookTotalChapter());
+			
+			if (currentChapterNumber < bookTotalChapterCount) {
+				currentChapterNumber ++;
+				
+				preferences.setChapterNumber("" + currentChapterNumber);
+				preferences.commit();
+				
+				readBible();
+			} else {
+				Toast.makeText(getApplicationContext(), R.string.alert_last_chapter_already, Toast.LENGTH_SHORT).show();
+			}
+			
+			break;
+		case MENU_BIBLE_VERSION_HHB:
+			preferences.setBibleVersion("hhb");
+			preferences.commit();
+			readBible();
+			break;
+		case MENU_BIBLE_VERSION_NIV:
+			preferences.setBibleVersion("niv");
+			preferences.commit();
+			readBible();
+			break;
+		}
+		
+		return true;
 	}
 
+	
 	@Override
 	public void onBackPressed() {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    builder.setTitle(this.getString(R.string.alert_dialog_title));
-	    //builder.setMessage("Are You Sure?");
 
 	    builder.setPositiveButton(this.getString(R.string.alert_dialog_ok_button_text), new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int which) {
@@ -139,25 +147,10 @@ public class BibleMainActivity extends Activity {
 	    alert.show();
 	}
 	
-	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		super.onMenuItemSelected(featureId, item);
-		switch (item.getItemId()){
-		case MENU_BIBLE_CHAPTER:
-			Intent intent = new Intent(this, BibleChapterChooserActivity.class);
-			this.startActivity(intent);
-//			this.startActivityForResult(intent, MENU_BIBLE_CHAPTER);
-			break;
-//		case MENU_HYMN_NUMBER_MULTIPLE:
-//			Intent intent2 = new Intent(this, BibleNumberMultipleActivity.class);
-//			this.startActivityForResult(intent2, MENU_HYMN_NUMBER_MULTIPLE);
-//			break;
-		}
-		
-		return true;
-	}
-
+	
 	private void readBible() {
+		bibleContainer.removeAllViews();
+		
 		preferences = new BibleMainActivityPreferences(this);
 		
 		String version = preferences.getBibleVersion();
@@ -169,7 +162,6 @@ public class BibleMainActivity extends Activity {
 		TextView textViewBookHeader = new TextView(this);
 		textViewBookHeader.setTextSize(30);
 		textViewBookHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
-//		textViewBookHeader.setTypeface(null, Typeface.BOLD);
 		textViewBookHeader.setText(chapter.getBookChineseName() + " " + chapterNumber);
 		bibleContainer.addView(textViewBookHeader);
 		
@@ -180,7 +172,6 @@ public class BibleMainActivity extends Activity {
 		for (String verse: verses) {
 			chapterContent = chapterContent + verse;
 		}
-		
 		
 		TextView textChapterContent = new TextView(this);
 		textChapterContent.setTextSize(fontSize +4);

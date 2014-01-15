@@ -15,7 +15,7 @@ public class BookHandler extends SQLiteOpenHelper {
     public static final String TAG = "BookHandler.java";
 
     // database version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 1;
 
     // database name
     protected static final String DATABASE_NAME = "Bible";
@@ -226,6 +226,42 @@ public class BookHandler extends SQLiteOpenHelper {
         db.close();
 
         return books;
+        
+    }
+    
+    public BookDTO getBook(String bookName) {
+
+        // select query
+        String sql = "";
+        sql += "SELECT * FROM " + tableName;
+        sql += " WHERE " + fieldName + " LIKE '%" + bookName + "%'";
+        sql += " ORDER BY " + fieldId + " DESC";
+        sql += " LIMIT 0,5";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // execute the query
+        Cursor cursor = db.rawQuery(sql, null);
+
+        int recCount = cursor.getCount();
+        
+        BookDTO book = null;
+        
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            String name = cursor.getString(cursor.getColumnIndex(fieldName));
+            String searchString = cursor.getString(cursor.getColumnIndex(fieldSearchString));
+            String number = cursor.getString(cursor.getColumnIndex(fieldNumber));
+            
+            book = new BookDTO(name, searchString, number);
+
+                
+        }
+
+        cursor.close();
+        db.close();
+
+        return book;
         
     }
 

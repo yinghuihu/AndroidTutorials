@@ -25,7 +25,6 @@
          <activity
             android:name="com.chccc.bible.BibleChapterChooserActivity" />
          
-         <activity
-            android:name="com.chccc.bible.BibleNumberMultipleActivity" />
+         
     </application>
 </manifest>

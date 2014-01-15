@@ -3,15 +3,26 @@
 
     <string name="app_name">圣经</string>
     <string name="action_settings">设置</string>
-    <string name="text_hymn_number_hint">请输入1-536</string>
+    <string name="text_chapter_number_input">请输入章节数字</string>
     
     
     <string name="menu_text_choose_bible">目录</string>
+    
+    <string name="menu_text_next_chapter">后一章</string>
+    <string name="menu_text_previous_chapter">前一章</string>
+    
+    <string name="menu_text_bible_version_hhb">和合本</string>
+    <string name="menu_text_bible_version_niv">NIV</string>
     
     
     <string name="alert_dialog_title">退出圣经应用</string>
     <string name="alert_dialog_ok_button_text">是</string>
     <string name="alert_dialog_notok_button_text">否</string>
+    
+    
+    <string name="alert_first_chapter_already">已经是第一章</string>
+    <string name="alert_last_chapter_already">已经是最后一章</string>
+    
     
     <string name="color_hymn_header">#C0C0C0</string>
 </resources>
