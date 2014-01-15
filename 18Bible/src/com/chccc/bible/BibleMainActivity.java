@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 public class BibleMainActivity extends Activity {
 
-//	public final static int MENU_HYMN_NUMBER = 1; 
+	public final static int MENU_BIBLE_CHAPTER = 1; 
 //	
 //	public final static int MENU_HYMN_NUMBER_MULTIPLE = 2;
 	
@@ -44,14 +44,14 @@ public class BibleMainActivity extends Activity {
 		setContentView(R.layout.bible_activity_main);
 		
 		bibleContainer = (LinearLayout) findViewById(R.id.bibleContainer );
-		readBible("hhb", "40", "27", bibleContainer);
+		readBible("hhb", "40", "27");
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		
-//		menu.add(0, this.MENU_HYMN_NUMBER, 0, this.getString(R.string.menu_text_choose_hymn));
+		menu.add(0, this.MENU_BIBLE_CHAPTER, 0, this.getString(R.string.menu_text_choose_bible));
 //		
 //		menu.add(0, this.MENU_HYMN_NUMBER_MULTIPLE, 0, this.getString(R.string.menu_text_choose_hymn_multiple));
 		
@@ -59,20 +59,39 @@ public class BibleMainActivity extends Activity {
 	}
 	
 	
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//		if (requestCode == MENU_HYMN_NUMBER) {
-//
-//			if (resultCode == RESULT_OK) {
-//				String result = data.getStringExtra("result");
-//				hymnContainer.removeAllViews();
-//				readHymn (result, hymnContainer);
-//				
-//			}
-//			if (resultCode == RESULT_CANCELED) {
-//				// Write your code if there's no result
-//			}
-//		} else if (requestCode == MENU_HYMN_NUMBER_MULTIPLE) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if (requestCode == MENU_BIBLE_CHAPTER) {
+
+			if (resultCode == RESULT_OK) {
+				String result = data.getStringExtra("result");
+				bibleContainer.removeAllViews();
+				
+				StringTokenizer st = new StringTokenizer(result, "|");
+				String bookNumber="";
+				String chapterNumber = "";
+
+//				if (st.hasMoreTokens()) {
+//					bookNumber = st.nextToken();
+//				}
+
+				if (st.hasMoreTokens()) {
+					bookNumber = st.nextToken();
+				}
+				
+				if (st.hasMoreTokens()) {
+					chapterNumber = st.nextToken();
+				}
+					
+				readBible("hhb", bookNumber, chapterNumber);
+				
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+		} 
+		
+//		else if (requestCode == MENU_HYMN_NUMBER_MULTIPLE) {
 //			if (resultCode == RESULT_OK) {
 //				String result = data.getStringExtra("result");
 //				hymnContainer.removeAllViews();
@@ -88,7 +107,7 @@ public class BibleMainActivity extends Activity {
 //				// Write your code if there's no result
 //			}
 //		}
-//	}
+	}
 
 	@Override
 	public void onBackPressed() {
@@ -114,23 +133,24 @@ public class BibleMainActivity extends Activity {
 	    alert.show();
 	}
 	
-//	@Override
-//	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-//		super.onMenuItemSelected(featureId, item);
-//		switch (item.getItemId()){
-//		case MENU_HYMN_NUMBER:
-//			Intent intent = new Intent(this, BibleNumberActivity.class);
-//			this.startActivityForResult(intent, MENU_HYMN_NUMBER);
-//			break;
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		super.onMenuItemSelected(featureId, item);
+		switch (item.getItemId()){
+		case MENU_BIBLE_CHAPTER:
+			Intent intent = new Intent(this, BibleChapterChooserActivity.class);
+			this.startActivityForResult(intent, MENU_BIBLE_CHAPTER);
+			break;
 //		case MENU_HYMN_NUMBER_MULTIPLE:
 //			Intent intent2 = new Intent(this, BibleNumberMultipleActivity.class);
 //			this.startActivityForResult(intent2, MENU_HYMN_NUMBER_MULTIPLE);
-//		}
-//		
-//		return true;
-//	}
+//			break;
+		}
+		
+		return true;
+	}
 
-	private void readBible(String version, String bookNumber, String chapterNumber, View v) {
+	private void readBible(String version, String bookNumber, String chapterNumber) {
 		
 		ChapterDO chapter = ChapterXmlParser.getChapterContent(getApplicationContext(), version, bookNumber, chapterNumber);
 		

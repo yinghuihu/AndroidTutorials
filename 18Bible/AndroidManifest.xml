@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
          <activity
-            android:name="com.chccc.bible.BibleNumberActivity" />
+            android:name="com.chccc.bible.BibleChapterChooserActivity" />
          
          <activity
             android:name="com.chccc.bible.BibleNumberMultipleActivity" />

@@ -10,14 +10,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class BibleNumberActivity extends Activity {
+public class BibleChapterChooserActivity extends Activity {
 	Button buttonHymnNumberSave;
 	EditText textHymnNumber;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.bible_number_input);
+		setContentView(R.layout.bible_chapter_chooser);
 		
 		buttonHymnNumberSave = (Button) findViewById(R.id.buttonHymnNumberSave);
 		textHymnNumber = (EditText)findViewById(R.id.textHymnNumber);

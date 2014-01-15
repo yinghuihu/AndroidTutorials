@@ -11,7 +11,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:ems="10"
         android:hint="@string/text_hymn_number_hint"
-        android:inputType="number" >
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
