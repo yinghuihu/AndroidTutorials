@@ -158,11 +158,30 @@ public class BibleMainActivity extends Activity {
 		String chapterNumber = preferences.getChapterNumber();
 		
 		ChapterDTO chapter = ChapterXmlParser.getChapterContent(getApplicationContext(), version, bookNumber, chapterNumber);
+
+		//validate the chapter choosen
+		int bookTotalChapterCount = Integer.parseInt(preferences.getBookTotalChapter());
+		if (Integer.parseInt(chapterNumber) > bookTotalChapterCount) {
+			 preferences.setChapterNumber("1");
+			 preferences.commit();
+			 
+			 chapterNumber = "1";
+			 chapter = ChapterXmlParser.getChapterContent(getApplicationContext(), version, bookNumber, "1");
+			 
+			 Toast.makeText(getApplicationContext(), R.string.alert_chapter_number_exceed_max, Toast.LENGTH_LONG).show();
+		}
+		
 		
 		TextView textViewBookHeader = new TextView(this);
 		textViewBookHeader.setTextSize(30);
 		textViewBookHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
-		textViewBookHeader.setText(chapter.getBookChineseName() + " " + chapterNumber);
+		
+		if (version.equalsIgnoreCase("hhb")) {
+			textViewBookHeader.setText(chapter.getBookChineseName() + " - 第" + chapterNumber + "章");	
+		} else if (version.equalsIgnoreCase("niv")) {
+			textViewBookHeader.setText(chapter.getBookEnglishName() + " - Chapter" + chapterNumber);
+		}
+		
 		bibleContainer.addView(textViewBookHeader);
 		
 		String chapterContent = "";

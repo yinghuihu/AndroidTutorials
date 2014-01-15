@@ -18,6 +18,7 @@
     <string name="alert_dialog_title">退出圣经应用</string>
     <string name="alert_dialog_ok_button_text">是</string>
     <string name="alert_dialog_notok_button_text">否</string>
+    <string name="alert_chapter_number_exceed_max">所选择的章节超过本书最大章节数</string>
     
     
     <string name="alert_first_chapter_already">已经是第一章</string>
