@@ -1,51 +1,44 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:paddingTop="@dimen/activity_vertical_marginx2"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
     >
- 
-   
-    <!-- <TableRow> 
-        <EditText
-	        android:id="@+id/textHymnNumber"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="@dimen/activity_vertical_margin"
-	        android:ems="10"
-	        android:hint="@string/text_hymn_number_hint"
-	        android:inputType="text" >
-	
-	        <requestFocus />
-	    </EditText>
+    
+    <TableRow >
 
-	    <Button
-	        android:id="@+id/buttonHymnNumberSave"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="@dimen/activity_vertical_margin"
-	        android:text="跳转" />
-	</TableRow>
-	 <TableRow>
         <TextView
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20px"
-            android:text="Write character"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="10dip"></TextView>
-    </TableRow>       -->
+            android:text="@string/text_view_chapter_chooser_book_name_text" 
+             android:ems="20"
+            />
+    	    
+    </TableRow>
     <TableRow>
  		<com.chccc.bible.chapterChooser.CustomAutoCompleteView
 	        android:id="@+id/bookJumpNumber"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
+     		style="@style/editTextClassic"
             android:textColor="#000000"
             android:textColorHighlight="#000000"
             android:textColorLink="#000000"
             android:textStyle="bold"
             android:width="250dip" >
+             <requestFocus />
 	    </com.chccc.bible.chapterChooser.CustomAutoCompleteView>
+    </TableRow>
+    
+     <TableRow android:paddingTop="@dimen/activity_vertical_marginx2">
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_view_chapter_chooser_chapter_number_text" 
+             android:ems="20"
+            />
     </TableRow>
     
      <TableRow> 
@@ -54,27 +47,21 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        style="@style/editTextClassic"
 	        android:ems="10"
-	        android:hint="@string/text_chapter_number_input"
-	        android:inputType="text" >
+	        android:inputType="number" >
 	
-	        <requestFocus />
+	       
 	    </EditText>
 
-	    <Button
+	    
+	</TableRow>
+	 <TableRow>
+        <Button
 	        android:id="@+id/buttonChapterChooserSave"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="@dimen/activity_vertical_margin"
 	        android:text="跳转" />
-	</TableRow>
-	 <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20px"
-            android:text="Write character"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="10dip"></TextView>
     </TableRow>
 </TableLayout>
