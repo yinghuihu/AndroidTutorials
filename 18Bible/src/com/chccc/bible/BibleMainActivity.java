@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -34,6 +35,7 @@ public class BibleMainActivity extends Activity {
 	
 	private static int fontSize = 18; 
 	
+	TextView txtChapterHeader = null;
 	
 	MenuItem hhbMenu = null;
 	MenuItem nivMenu = null;
@@ -49,7 +51,7 @@ public class BibleMainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bible_activity_main);
-		
+		txtChapterHeader = (TextView) findViewById(R.id.txtChapterHeader);
 		bibleContainer = (LinearLayout) findViewById(R.id.bibleContainer );
 		
 		
@@ -64,14 +66,16 @@ public class BibleMainActivity extends Activity {
 		menu.add(0, this.MENU_BIBLE_PREVIOUS_CHAPTER, 0, this.getString(R.string.menu_text_previous_chapter));
 		menu.add(0, this.MENU_BIBLE_NEXT_CHAPTER, 0, this.getString(R.string.menu_text_next_chapter));
 		
-		mixMenu = menu.add(0, this.MENU_BIBLE_VERSION_MIX, 0, this.getString(R.string.menu_text_bible_version_mix));
-		mixMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		
 		
 		hhbMenu = menu.add(0, this.MENU_BIBLE_VERSION_HHB, 0, this.getString(R.string.menu_text_bible_version_hhb));
 		hhbMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 				
 		nivMenu = menu.add(0, this.MENU_BIBLE_VERSION_NIV, 0, this.getString(R.string.menu_text_bible_version_niv));
 		nivMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		
+		mixMenu = menu.add(0, this.MENU_BIBLE_VERSION_MIX, 0, this.getString(R.string.menu_text_bible_version_mix));
+		mixMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
 		readBible();
 		return true;
@@ -194,21 +198,20 @@ public class BibleMainActivity extends Activity {
 		}
 		
 		
-		TextView textViewBookHeader = new TextView(this);
-		textViewBookHeader.setTextSize(30);
-		textViewBookHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
+		txtChapterHeader.setTextSize(30);
+		txtChapterHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
 		
 		if (version.equalsIgnoreCase("hhb") || version.equalsIgnoreCase("mix")) {
-			textViewBookHeader.setText(chapterHhb.getBookChineseName() + " - 第" + chapterNumber + "章");	
+			txtChapterHeader.setText(chapterHhb.getBookChineseName() + " - 第" + chapterNumber + "章");	
 			nivMenu.setVisible(true);
 			hhbMenu.setVisible(false);
 		} else if (version.equalsIgnoreCase("niv")) {
-			textViewBookHeader.setText(chapterHhb.getBookEnglishName() + " - Chapter" + chapterNumber);
+			txtChapterHeader.setText(chapterHhb.getBookEnglishName() + " - Chapter " + chapterNumber);
 			hhbMenu.setVisible(true);
 			nivMenu.setVisible(false);
 		}
 		
-		bibleContainer.addView(textViewBookHeader);
+//		bibleContainer.addView(textViewBookHeader);
 		
 		String chapterContent = "";
 		
