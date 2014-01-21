@@ -12,6 +12,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import com.chccc.bible.dto.ChapterDTO;
+import com.chccc.bible.dto.VerseDTO;
 
 import android.content.Context;
 
@@ -19,7 +20,7 @@ import android.content.Context;
 public class ChapterXmlParser {
 	
 	public static ChapterDTO getChapterContent(Context applicationContext, String bookVersion, String bookNumber, String chapterNumber) {
-		ArrayList<String> lines = new ArrayList();
+		ArrayList<VerseDTO> lines = new ArrayList();
 		
 		ChapterDTO chapter = new ChapterDTO();
 		
@@ -55,7 +56,8 @@ public class ChapterXmlParser {
 							Element LineElement = (Element) lineNodeList.item(j);
 							String lineNumber = LineElement.getAttribute("number");
 							String lineContent = lineNodeList.item(j).getChildNodes().item(0).getNodeValue();
-							lines.add(lineNumber + "\n" + lineContent + "\n\n");
+							VerseDTO verse = new VerseDTO(lineContent, lineNumber);
+							lines.add(verse);
 						}
 						
 						break;

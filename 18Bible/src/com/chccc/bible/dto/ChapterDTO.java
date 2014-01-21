@@ -22,7 +22,7 @@ public class ChapterDTO {
 	
 	private String bookEnglishName;
 	
-	private ArrayList<String> verses;
+	private ArrayList<VerseDTO> verses;
 
 	public String getChapterCount() {
 		return chapterCount;
@@ -48,11 +48,11 @@ public class ChapterDTO {
 		this.bookEnglishName = bookEnglishName;
 	}
 
-	public ArrayList<String> getVerses() {
+	public ArrayList<VerseDTO> getVerses() {
 		return verses;
 	}
 
-	public void setVerses(ArrayList<String> verses) {
+	public void setVerses(ArrayList<VerseDTO> verses) {
 		this.verses = verses;
 	}
 }
