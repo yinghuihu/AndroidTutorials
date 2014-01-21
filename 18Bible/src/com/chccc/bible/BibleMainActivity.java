@@ -23,6 +23,8 @@ public class BibleMainActivity extends Activity {
 	public static BibleMainActivityPreferences preferences;
 	
 	public final static int MENU_BIBLE_CHAPTER = 1; 
+	
+	public final static int MENU_BIBLE_VERSION_MIX = 7;
 	public final static int MENU_BIBLE_VERSION_HHB = 8;
 	public final static int MENU_BIBLE_VERSION_NIV= 9;
 	
@@ -30,6 +32,11 @@ public class BibleMainActivity extends Activity {
 	public final static int MENU_BIBLE_PREVIOUS_CHAPTER = 11;
 	
 	private static int fontSize = 18; 
+	
+	
+	MenuItem hhbMenu = null;
+	MenuItem nivMenu = null;
+	MenuItem mixMenu = null;
 
 	public static void setFontSize(int fontSize) {
 		BibleMainActivity.fontSize = fontSize;
@@ -44,7 +51,7 @@ public class BibleMainActivity extends Activity {
 		
 		bibleContainer = (LinearLayout) findViewById(R.id.bibleContainer );
 		
-		readBible();
+		
 	}
 
 	@Override
@@ -56,9 +63,16 @@ public class BibleMainActivity extends Activity {
 		menu.add(0, this.MENU_BIBLE_PREVIOUS_CHAPTER, 0, this.getString(R.string.menu_text_previous_chapter));
 		menu.add(0, this.MENU_BIBLE_NEXT_CHAPTER, 0, this.getString(R.string.menu_text_next_chapter));
 		
-		menu.add(0, this.MENU_BIBLE_VERSION_HHB, 0, this.getString(R.string.menu_text_bible_version_hhb));
-		menu.add(0, this.MENU_BIBLE_VERSION_NIV, 0, this.getString(R.string.menu_text_bible_version_niv));
+		mixMenu = menu.add(0, this.MENU_BIBLE_VERSION_MIX, 0, this.getString(R.string.menu_text_bible_version_mix));
+		mixMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
+		hhbMenu = menu.add(0, this.MENU_BIBLE_VERSION_HHB, 0, this.getString(R.string.menu_text_bible_version_hhb));
+		hhbMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				
+		nivMenu = menu.add(0, this.MENU_BIBLE_VERSION_NIV, 0, this.getString(R.string.menu_text_bible_version_niv));
+		nivMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		
+		readBible();
 		return true;
 	}
 	
@@ -109,6 +123,11 @@ public class BibleMainActivity extends Activity {
 			
 			break;
 		case MENU_BIBLE_VERSION_HHB:
+			preferences.setBibleVersion("hhb");
+			preferences.commit();
+			readBible();
+			break;
+		case MENU_BIBLE_VERSION_MIX:
 			preferences.setBibleVersion("hhb");
 			preferences.commit();
 			readBible();
@@ -178,8 +197,12 @@ public class BibleMainActivity extends Activity {
 		
 		if (version.equalsIgnoreCase("hhb")) {
 			textViewBookHeader.setText(chapter.getBookChineseName() + " - 第" + chapterNumber + "章");	
+			nivMenu.setVisible(true);
+			hhbMenu.setVisible(false);
 		} else if (version.equalsIgnoreCase("niv")) {
 			textViewBookHeader.setText(chapter.getBookEnglishName() + " - Chapter" + chapterNumber);
+			hhbMenu.setVisible(true);
+			nivMenu.setVisible(false);
 		}
 		
 		bibleContainer.addView(textViewBookHeader);

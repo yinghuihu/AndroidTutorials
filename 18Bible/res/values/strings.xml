@@ -11,8 +11,9 @@
     <string name="menu_text_next_chapter">后一章</string>
     <string name="menu_text_previous_chapter">前一章</string>
     
-    <string name="menu_text_bible_version_hhb">和合本</string>
-    <string name="menu_text_bible_version_niv">NIV</string>
+    <string name="menu_text_bible_version_hhb">中</string>
+    <string name="menu_text_bible_version_niv">英</string>
+    <string name="menu_text_bible_version_mix">混</string>
     
     
     <string name="alert_dialog_title">退出圣经应用</string>
