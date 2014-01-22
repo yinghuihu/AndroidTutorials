@@ -33,6 +33,8 @@ public class BibleMainActivity extends Activity {
 	public final static int MENU_BIBLE_NEXT_CHAPTER = 10;
 	public final static int MENU_BIBLE_PREVIOUS_CHAPTER = 11;
 	
+	public final static int MENU_BIBLE_INDEX = 12;
+	
 	private static int fontSize = 18; 
 	
 	TextView txtChapterHeader = null;
@@ -77,6 +79,8 @@ public class BibleMainActivity extends Activity {
 		
 		mixMenu = menu.add(0, this.MENU_BIBLE_VERSION_MIX, 0, this.getString(R.string.menu_text_bible_version_mix));
 		mixMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		
+		menu.add(0, this.MENU_BIBLE_INDEX, 0, this.getString(R.string.menu_index));
 		
 		readBible();
 		return true;
@@ -142,6 +146,10 @@ public class BibleMainActivity extends Activity {
 			preferences.setBibleVersion("niv");
 			preferences.commit();
 			readBible();
+			break;
+		case MENU_BIBLE_INDEX: 
+			Intent intentIndex = new Intent(this, BookIndexActivity.class);
+			this.startActivity(intentIndex);
 			break;
 		}
 		

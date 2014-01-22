@@ -5,6 +5,10 @@ public class BookDTO {
 	private String searchString;
 	private String number;
 	
+	private String testament;
+	
+	private String chapterCount;
+	
 	public String getName() {
 		return name;
 	}
@@ -24,9 +28,23 @@ public class BookDTO {
 		this.number = number;
 	}
 	
-	public BookDTO(String name, String searchString, String number) {
+	public BookDTO(String name, String searchString, String number, String testament, String chapterCount) {
 		this.name= name;
 		this.searchString = searchString;
 		this.number = number;
+		this.testament = testament;
+		this.chapterCount = chapterCount;
+	}
+	public String getTestament() {
+		return testament;
+	}
+	public void setTestament(String testament) {
+		this.testament = testament;
+	}
+	public String getChapterCount() {
+		return chapterCount;
+	}
+	public void setChapterCount(String chapterCount) {
+		this.chapterCount = chapterCount;
 	}
 }

@@ -8,7 +8,8 @@
     <string name="text_view_chapter_chooser_book_name_text">请输入书名汉字的每个首位拼音</string>
     <string name="text_view_chapter_chooser_chapter_number_text">请输入数字选第几章</string>
     
-    <string name="menu_text_choose_bible">目录</string>
+    <string name="menu_text_choose_bible">跳转</string>
+    <string name="menu_index">目录</string>
     
     <string name="menu_text_next_chapter">后一章</string>
     <string name="menu_text_previous_chapter">前一章</string>
@@ -27,6 +28,8 @@
     <string name="alert_first_chapter_already">已经是第一章</string>
     <string name="alert_last_chapter_already">已经是最后一章</string>
     
+    
+    <string name="fragment_hymnheader_list_title">生命圣诗</string>
     
     <string name="color_hymn_header">#C0C0C0</string>
 </resources>
