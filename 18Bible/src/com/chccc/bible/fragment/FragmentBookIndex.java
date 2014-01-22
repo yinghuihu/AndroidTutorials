@@ -2,10 +2,12 @@ package com.chccc.bible.fragment;
 
 import java.util.ArrayList;
 
+import com.chccc.bible.BibleChapterChooserActivity;
 import com.chccc.bible.R;
-import com.chccc.hymn.HymnHeader;
-import com.chccc.hymn.HymnHeaderXmlParser;
-import com.chccc.hymn.HymnMainActivity;
+import com.chccc.bible.db.BookHandler;
+import com.chccc.bible.dto.BookDTO;
+//import com.chccc.hymn.HymnHeader;
+//import com.chccc.hymn.HymnHeaderXmlParser;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,47 +24,45 @@ import android.widget.TextView;
 
 public class FragmentBookIndex extends ListFragment {
 	
-	public static final String HYMN_HEADER_NUMBER = "com.chccc.hymn.header.number";
-	private ArrayList<HymnHeader> hhl;
+	public static final String BOOK_INDEX_CHOOSER_MSG = "com.chccc.bible.index";
+	private ArrayList<BookDTO> books;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		// Change the title for the current Activity
+		BookHandler bookHandler;
 		
-		getActivity().setTitle(R.string.fragment_hymnheader_list_title);
+		bookHandler = new BookHandler(getActivity());
 		
-		// Get the ArrayList from AllContacts
+		books = bookHandler.getBooks(BookHandler.OLD_TESTAMENT);
 		
-		hhl = HymnHeaderXmlParser.getHymnHeaders(this.getActivity());
-		
-		HymnHeaderAdapter hymnHeaderAdapter = new HymnHeaderAdapter(hhl);
+		BookIndexAdapter bookIndexAdapter = new BookIndexAdapter(books);
 		
 		// Provides the data for the ListView by setting the Adapter 
 		
-		setListAdapter(hymnHeaderAdapter);
+		setListAdapter(bookIndexAdapter);
 		
 	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		
-		HymnHeader clickedHymnHeader = ((HymnHeaderAdapter) getListAdapter()).getItem(position);
+		BookDTO clickedHymnHeader = ((BookIndexAdapter) getListAdapter()).getItem(position);
 		
 		// NEW
 		// We want our ContactViewPager to be called now if they click 
 		// on a Contact
 		
-		Intent newIntent = new Intent(getActivity(), HymnMainActivity.class);
+		//-->Intent newIntent = new Intent(getActivity(), HymnMainActivity.class);
 		
 //		startActivityForResult(newIntent, 0);
 		
 //		Intent newIntent = new Intent(getActivity(), ContactViewPager.class);
 		
-		newIntent.putExtra(HYMN_HEADER_NUMBER, clickedHymnHeader.getNumber());
+		//-->newIntent.putExtra(HYMN_HEADER_NUMBER, clickedHymnHeader.getNumber());
 //		
-		startActivity(newIntent);
+		//-->startActivity(newIntent);
 		
 		// END OF NEW
 		
@@ -78,9 +78,9 @@ public class FragmentBookIndex extends ListFragment {
 
 
 
-	private class HymnHeaderAdapter extends ArrayAdapter<HymnHeader> {
+	private class BookIndexAdapter extends ArrayAdapter<BookDTO> {
 
-		public HymnHeaderAdapter(ArrayList<HymnHeader> hhl) {
+		public BookIndexAdapter(ArrayList<BookDTO> books) {
 	    	
 	    		// An Adapter acts as a bridge between an AdapterView and the 
 				// data for that view. The Adapter also makes a View for each 
@@ -91,7 +91,7 @@ public class FragmentBookIndex extends ListFragment {
 				// android.R.layout.simple_list_item_1 is a predefined 
 				// layout provided by Android that stands in as a default
 	    	
-	            super(getActivity(), android.R.layout.simple_list_item_1, hhl);
+	            super(getActivity(), android.R.layout.simple_list_item_1, books);
 	    }
 		
 		// getView is called each time it needs to display a new list item
@@ -110,17 +110,17 @@ public class FragmentBookIndex extends ListFragment {
 			// Check if this is a recycled list item and if not we inflate it
 			
 			if(convertView == null){
-				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_hymnheader, null);
+				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_book_index, null);
 			}
 			
 			// Find the right data to put in the list item
-			HymnHeader theHymnHeaderItem = getItem(position);
+			BookDTO book = getItem(position);
 			
 			// Put the right data into the right components
 			
-			TextView hymnHeaderTitleTextView = (TextView)convertView.findViewById(R.id.hymnHeaderTitle);
+			TextView bookNameBookIndexTextView = (TextView)convertView.findViewById(R.id.bookNameBookIndex);
 			
-			hymnHeaderTitleTextView.setText(theHymnHeaderItem.getTitle());
+			bookNameBookIndexTextView.setText(book.getName());
 			
 	        return convertView;
 			

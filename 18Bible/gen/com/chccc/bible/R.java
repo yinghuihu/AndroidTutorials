@@ -26,28 +26,26 @@ public final class R {
         public static final int list_item_icon2=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000d;
+        public static final int action_settings=0x7f08000c;
         public static final int bibleContainer=0x7f080003;
         public static final int bookJumpNumber=0x7f080005;
+        public static final int bookNameBookIndex=0x7f08000a;
         public static final int buttonChapterChooserSave=0x7f080008;
         public static final int fragmentContainer=0x7f080000;
-        public static final int hymnContainer=0x7f080009;
-        public static final int hymnHeaderTitle=0x7f08000b;
-        public static final int icon=0x7f08000a;
+        public static final int icon=0x7f080009;
         public static final int scrollView1=0x7f080002;
         public static final int textChapterChooserChapterNumber=0x7f080007;
         public static final int textView1=0x7f080004;
         public static final int textView2=0x7f080006;
-        public static final int textViewItem=0x7f08000c;
+        public static final int textViewItem=0x7f08000b;
         public static final int txtChapterHeader=0x7f080001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int bible_activity_main=0x7f030001;
         public static final int bible_chapter_chooser2=0x7f030002;
-        public static final int hymn_activity_main=0x7f030003;
-        public static final int list_item_hymnheader=0x7f030004;
-        public static final int list_view_row=0x7f030005;
+        public static final int list_item_book_index=0x7f030003;
+        public static final int list_view_row=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;

@@ -32,8 +32,8 @@ public class BookHandler extends SQLiteOpenHelper {
     private  final String fieldTestament = "testament";
     private  final String fieldChapterCount = "chapterCount";
     
-    private  final String OLD_TESTAMENT = "OLD";
-    private  final String NEW_TESTAMENT = "NEW";
+    public  final static String OLD_TESTAMENT = "OLD";
+    public final static String NEW_TESTAMENT = "NEW";
     
 
     // constructor
@@ -292,7 +292,7 @@ public class BookHandler extends SQLiteOpenHelper {
         String sql = "";
         sql += "SELECT * FROM " + tableName;
         sql += " WHERE " + fieldTestament + " = '" + testament.toUpperCase() + "'";
-        sql += " ORDER BY " + fieldId + " DESC";
+        sql += " ORDER BY " + fieldId + " ASC";
 //        sql += " LIMIT 0,5";
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -306,17 +306,18 @@ public class BookHandler extends SQLiteOpenHelper {
         
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
-            String name = cursor.getString(cursor.getColumnIndex(fieldName));
-            String searchString = cursor.getString(cursor.getColumnIndex(fieldSearchString));
-            String number = cursor.getString(cursor.getColumnIndex(fieldNumber));
-//            String testament= cursor.getString(cursor.getColumnIndex(fieldTestament));
-            String chapterCount = cursor.getString(cursor.getColumnIndex(fieldChapterCount));
+            do {
+	            String name = cursor.getString(cursor.getColumnIndex(fieldName));
+	            String searchString = cursor.getString(cursor.getColumnIndex(fieldSearchString));
+	            String number = cursor.getString(cursor.getColumnIndex(fieldNumber));
+	//            String testament= cursor.getString(cursor.getColumnIndex(fieldTestament));
+	            String chapterCount = cursor.getString(cursor.getColumnIndex(fieldChapterCount));
+	            
+	            book = new BookDTO(name, searchString, number, testament.toUpperCase(), chapterCount);
+	            
+	            books.add(book);
             
-            book = new BookDTO(name, searchString, number, testament.toUpperCase(), chapterCount);
-            
-            books.add(book);
-            
-                
+            } while (cursor.moveToNext());
         }
 
         cursor.close();
