@@ -32,4 +32,78 @@
     <string name="fragment_hymnheader_list_title">生命圣诗</string>
     
     <string name="color_hymn_header">#C0C0C0</string>
+    
+    <string name="initial_book_01">创</string>
+    <string name="initial_book_02">出</string>
+    <string name="initial_book_03">利</string>
+    <string name="initial_book_04">民</string>
+    <string name="initial_book_05">申</string>
+    <string name="initial_book_06">书</string>
+    <string name="initial_book_07">士</string>
+    <string name="initial_book_08">得</string>
+    <string name="initial_book_09">撒上</string>
+    <string name="initial_book_10">撒下</string>
+    
+    <string name="initial_book_11">王上</string>
+    <string name="initial_book_12">王下</string>
+    <string name="initial_book_13">代上</string>
+    <string name="initial_book_14">代下</string>
+    <string name="initial_book_15">拉</string>
+    <string name="initial_book_16">尼</string>
+    <string name="initial_book_17">斯</string>
+    <string name="initial_book_18">伯</string>
+    <string name="initial_book_19">诗</string>
+    <string name="initial_book_20">箴</string>
+    
+    <string name="initial_book_21">传</string>
+    <string name="initial_book_22">歌</string>
+    <string name="initial_book_23">赛</string>
+    <string name="initial_book_24">耶</string>
+    <string name="initial_book_25">哀</string>
+    <string name="initial_book_26">结</string>
+    <string name="initial_book_27">但</string>
+    <string name="initial_book_28">何</string>
+    <string name="initial_book_29">珥</string>
+    <string name="initial_book_30">摩</string>
+    
+    <string name="initial_book_31">俄</string>
+    <string name="initial_book_32">拿</string>
+    <string name="initial_book_33">弥</string>
+    <string name="initial_book_34">鸿</string>
+    <string name="initial_book_35">哈</string>
+    <string name="initial_book_36">番</string>
+    <string name="initial_book_37">该</string>
+    <string name="initial_book_38">亚</string>
+    <string name="initial_book_39">玛</string>
+    <string name="initial_book_40">太</string>
+    
+    <string name="initial_book_41">可</string>
+    <string name="initial_book_42">路</string>
+    <string name="initial_book_43">约</string>
+    <string name="initial_book_44">徒</string>
+    <string name="initial_book_45">罗</string>
+    <string name="initial_book_46">林前</string>
+    <string name="initial_book_47">林后</string>
+    <string name="initial_book_48">加</string>
+    <string name="initial_book_49">弗</string>
+    <string name="initial_book_50">腓</string>
+    
+    <string name="initial_book_51">西</string>
+    <string name="initial_book_52">帖前</string>
+    <string name="initial_book_53">帖后</string>
+    <string name="initial_book_54">提前</string>
+    <string name="initial_book_55">提后</string>
+    <string name="initial_book_56">多</string>
+    <string name="initial_book_57">门</string>
+    <string name="initial_book_58">来</string>
+    <string name="initial_book_59">雅</string>
+    <string name="initial_book_60">彼前</string>
+    
+    <string name="initial_book_61">彼后</string>
+    <string name="initial_book_62">约1</string>
+    <string name="initial_book_63">约2</string>
+    <string name="initial_book_64">约3</string>
+    <string name="initial_book_65">犹</string>
+    <string name="initial_book_66">启</string>
+    
 </resources>

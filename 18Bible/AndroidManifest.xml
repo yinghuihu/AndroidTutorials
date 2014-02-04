@@ -35,6 +35,19 @@
             android:screenOrientation="portrait"
    			android:configChanges="orientation|keyboardHidden"
    			/>
+   		
+         <activity
+            android:name="com.chccc.bible.BibleBookChooserActivity" 
+            android:screenOrientation="portrait"
+   			android:configChanges="orientation|keyboardHidden"
+   			/>	
+   			
+         <activity
+            android:name="com.chccc.bible.BibleBookChapterChooserActivity" 
+            android:screenOrientation="portrait"
+   			android:configChanges="orientation|keyboardHidden"
+   			/>	
+   			
         
     </application>
     

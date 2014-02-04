@@ -148,7 +148,7 @@ public class BibleMainActivity extends Activity {
 			readBible();
 			break;
 		case MENU_BIBLE_INDEX: 
-			Intent intentIndex = new Intent(this, BookIndexActivity.class);
+			Intent intentIndex = new Intent(this, BibleBookChooserActivity.class);
 			this.startActivity(intentIndex);
 			break;
 		}
