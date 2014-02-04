@@ -2,6 +2,7 @@ package com.chccc.bible;
 
 import java.util.ArrayList;
 
+import com.chccc.bible.db.BookHandler;
 import com.chccc.bible.dto.ChapterDTO;
 import com.chccc.bible.dto.VerseDTO;
 import com.chccc.bible.util.BibleMainActivityPreferences;
@@ -17,6 +18,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +35,8 @@ public class BibleMainActivity extends Activity {
 	public final static int MENU_BIBLE_NEXT_CHAPTER = 10;
 	public final static int MENU_BIBLE_PREVIOUS_CHAPTER = 11;
 	
-	public final static int MENU_BIBLE_INDEX = 12;
+	public final static int MENU_BIBLE_OLD_TESTAMENT = 12;
+	public final static int MENU_BIBLE_NEW_TESTAMENT = 13;
 	
 	private static int fontSize = 18; 
 	
@@ -42,6 +45,10 @@ public class BibleMainActivity extends Activity {
 	MenuItem hhbMenu = null;
 	MenuItem nivMenu = null;
 	MenuItem mixMenu = null;
+	MenuItem oldMenu = null;
+	MenuItem newMenu = null;
+	
+	public final static String EXTRA_MESSAGE = "com.chccc.bible.BibleMainActivity.MESSAGE";
 
 	public static void setFontSize(int fontSize) {
 		BibleMainActivity.fontSize = fontSize;
@@ -64,7 +71,7 @@ public class BibleMainActivity extends Activity {
 		super.onCreateOptionsMenu(menu);
 		
 		MenuItem chapterChooserMenu = menu.add(0, this.MENU_BIBLE_CHAPTER, 0, this.getString(R.string.menu_text_choose_bible));
-		chapterChooserMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//		chapterChooserMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 		menu.add(0, this.MENU_BIBLE_PREVIOUS_CHAPTER, 0, this.getString(R.string.menu_text_previous_chapter));
 		menu.add(0, this.MENU_BIBLE_NEXT_CHAPTER, 0, this.getString(R.string.menu_text_next_chapter));
@@ -80,7 +87,11 @@ public class BibleMainActivity extends Activity {
 		mixMenu = menu.add(0, this.MENU_BIBLE_VERSION_MIX, 0, this.getString(R.string.menu_text_bible_version_mix));
 		mixMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
-		menu.add(0, this.MENU_BIBLE_INDEX, 0, this.getString(R.string.menu_index));
+		oldMenu = menu.add(0, this.MENU_BIBLE_OLD_TESTAMENT, 0, this.getString(R.string.menu_old_testament));
+		oldMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		
+		newMenu = menu.add(0, this.MENU_BIBLE_NEW_TESTAMENT, 0, this.getString(R.string.menu_new_testament));
+		newMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
 		readBible();
 		return true;
@@ -147,9 +158,16 @@ public class BibleMainActivity extends Activity {
 			preferences.commit();
 			readBible();
 			break;
-		case MENU_BIBLE_INDEX: 
-			Intent intentIndex = new Intent(this, BibleBookChooserActivity.class);
-			this.startActivity(intentIndex);
+		case MENU_BIBLE_OLD_TESTAMENT: 
+			Intent intentOld = new Intent(this, BibleBookChooserActivity.class);
+			intentOld.putExtra(EXTRA_MESSAGE, BookHandler.OLD_TESTAMENT);
+			this.startActivity(intentOld);
+			break;
+			
+		case MENU_BIBLE_NEW_TESTAMENT: 
+			Intent intentNew = new Intent(this, BibleBookChooserActivity.class);
+			intentNew.putExtra(EXTRA_MESSAGE, BookHandler.NEW_TESTAMENT);
+			this.startActivity(intentNew);
 			break;
 		}
 		
@@ -254,5 +272,8 @@ public class BibleMainActivity extends Activity {
 		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
 		textChapterContent.setTypeface(face);
 		bibleContainer.addView(textChapterContent);
+		
+		ScrollView scrv = (ScrollView)findViewById(R.id.scrollView1);
+		scrv.scrollTo(0, 0);
 	}
 }

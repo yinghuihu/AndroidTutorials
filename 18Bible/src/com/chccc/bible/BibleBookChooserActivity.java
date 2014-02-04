@@ -24,9 +24,7 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 	TableLayout bookChooserContainer;
 	
 	public BookHandler bookHandler;
-	private ArrayList<BookDTO> booksOld;
-	
-	private ArrayList<BookDTO> booksNew;
+	private ArrayList<BookDTO> books;
 	
 	private int button_per_row =5;
 	
@@ -40,30 +38,38 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.biblebookchooser_activity_main);
 		
+		Intent intent = getIntent();
+
+		String testament = intent.getStringExtra(BibleMainActivity.EXTRA_MESSAGE);
 		
 		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
 		
 		bookHandler = new BookHandler(BibleBookChooserActivity.this);
-		booksOld = bookHandler.getBooks(BookHandler.OLD_TESTAMENT);	
+		books = bookHandler.getBooks(testament);	
 		
 		bookChooserContainer = (TableLayout)findViewById(R.id.bookChooserContainer);
 		bookChooserContainer.removeAllViews();
 		
 		//add old testament
-		TextView  tvold= new TextView(this);
-		tvold.setText("旧约");
+		TextView  tv= new TextView(this);
 		
-		tvold.setTextSize(30);
+		if (testament.equals(BookHandler.OLD_TESTAMENT)) {
+			tv.setText("旧约");
+		} else {
+			tv.setText("新约");
+		}
+		
+		tv.setTextSize(30);
 //		tvold.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
 		
-		TableRow trold = new TableRow(this);
-		trold.addView(tvold);
-		bookChooserContainer.addView(trold);
+		TableRow trt = new TableRow(this);
+		trt.addView(tv);
+		bookChooserContainer.addView(trt);
 		
 		int bookCount = 0;
 		
 		TableRow tr = new TableRow(this);
-		for (BookDTO book: booksOld) {
+		for (BookDTO book: books) {
 			
 			if (bookCount % button_per_row ==0) {
 				tr = new TableRow(this);
@@ -83,43 +89,6 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 			
 			bookCount++;
 		}
-		
-		
-		//add new testament
-		TextView  tvnew= new TextView(this);
-		tvnew.setText("新约");
-		tvnew.setTextSize(30);
-//		tvnew.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
-		TableRow trnew = new TableRow(this);
-		trnew.addView(tvnew);
-		bookChooserContainer.addView(trnew);
-		
-		
-		booksNew = bookHandler.getBooks(BookHandler.NEW_TESTAMENT);
-		
-		bookCount = 0;
-		
-		tr = new TableRow(this);
-		for (BookDTO book: booksNew) {
-			
-			if (bookCount % button_per_row ==0) {
-				tr = new TableRow(this);
-				bookChooserContainer.addView(tr);
-			}
-			
-			Button btn = new Button(this);
-			btn.setText(book.getInitialString());
-			
-			btn.setTypeface(face);
-			btn.setTextSize(fontSize);
-			
-			btn.setOnClickListener(this);
-			
-			tr.addView(btn);
-			
-			bookCount++;
-		}
-		
 	}
 
 	
