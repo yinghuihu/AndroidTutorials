@@ -200,6 +200,9 @@ public class BibleMainActivity extends Activity {
 	
 	
 	private void readBible() {
+		try {
+			
+	
 		bibleContainer.removeAllViews();
 		
 		preferences = new BibleMainActivityPreferences(this);
@@ -275,5 +278,14 @@ public class BibleMainActivity extends Activity {
 		
 		ScrollView scrv = (ScrollView)findViewById(R.id.scrollView1);
 		scrv.scrollTo(0, 0);
+		
+		} catch(Exception e) {
+			Toast.makeText(getApplicationContext(), R.string.alert_generic_error_msg, Toast.LENGTH_LONG).show();
+			preferences.setChapterNumber("1");
+			preferences.setBibleVersion("hhb");
+            preferences.setBookNumber("01");
+            
+			preferences.commit();
+		}
 	}
 }

@@ -61,10 +61,11 @@ public final class R {
         public static final int alert_dialog_ok_button_text=0x7f05000e;
         public static final int alert_dialog_title=0x7f05000d;
         public static final int alert_first_chapter_already=0x7f050011;
+        public static final int alert_generic_error_msg=0x7f050013;
         public static final int alert_last_chapter_already=0x7f050012;
         public static final int app_name=0x7f050000;
-        public static final int color_hymn_header=0x7f050014;
-        public static final int fragment_hymnheader_list_title=0x7f050013;
+        public static final int color_hymn_header=0x7f050015;
+        public static final int fragment_hymnheader_list_title=0x7f050014;
         public static final int menu_new_testament=0x7f050007;
         public static final int menu_old_testament=0x7f050006;
         public static final int menu_text_bible_version_hhb=0x7f05000a;
