@@ -47,6 +47,8 @@ public class BibleMainActivity extends Activity {
 	MenuItem mixMenu = null;
 	MenuItem oldMenu = null;
 	MenuItem newMenu = null;
+	MenuItem previousMenu = null;
+	MenuItem nextMenu = null;
 	
 	public final static String EXTRA_MESSAGE = "com.chccc.bible.BibleMainActivity.MESSAGE";
 
@@ -73,9 +75,11 @@ public class BibleMainActivity extends Activity {
 		MenuItem chapterChooserMenu = menu.add(0, this.MENU_BIBLE_CHAPTER, 0, this.getString(R.string.menu_text_choose_bible));
 //		chapterChooserMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		menu.add(0, this.MENU_BIBLE_PREVIOUS_CHAPTER, 0, this.getString(R.string.menu_text_previous_chapter));
-		menu.add(0, this.MENU_BIBLE_NEXT_CHAPTER, 0, this.getString(R.string.menu_text_next_chapter));
+		previousMenu = menu.add(0, this.MENU_BIBLE_PREVIOUS_CHAPTER, 0, this.getString(R.string.menu_text_previous_chapter));
+		previousMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
+		nextMenu = menu.add(0, this.MENU_BIBLE_NEXT_CHAPTER, 0, this.getString(R.string.menu_text_next_chapter));
+		nextMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
 		
 		hhbMenu = menu.add(0, this.MENU_BIBLE_VERSION_HHB, 0, this.getString(R.string.menu_text_bible_version_hhb));
@@ -88,10 +92,10 @@ public class BibleMainActivity extends Activity {
 		mixMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
 		oldMenu = menu.add(0, this.MENU_BIBLE_OLD_TESTAMENT, 0, this.getString(R.string.menu_old_testament));
-		oldMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//		oldMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
 		newMenu = menu.add(0, this.MENU_BIBLE_NEW_TESTAMENT, 0, this.getString(R.string.menu_new_testament));
-		newMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//		newMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
 		readBible();
 		return true;
@@ -112,35 +116,26 @@ public class BibleMainActivity extends Activity {
 			break;
 		case MENU_BIBLE_PREVIOUS_CHAPTER:
 			
-			currentChapterNumber = Integer.parseInt(preferences.getChapterNumber());
-			
-			if (currentChapterNumber != 1) {
-				currentChapterNumber--;
-				
-				preferences.setChapterNumber("" + currentChapterNumber);
-				preferences.commit();
-				readBible();
-			} else {
-				Toast.makeText(getApplicationContext(), R.string.alert_first_chapter_already, Toast.LENGTH_SHORT).show();
+			preferences.moveToPreviousChapter();
+
+			if (preferences.getPreferenceMessage() != null) {
+				Toast.makeText(getApplicationContext(), preferences.getPreferenceMessage(), Toast.LENGTH_SHORT).show();
+				preferences.resetPreferenceMessage();
 			}
+			
+			readBible();
 			
 			break;
 		case MENU_BIBLE_NEXT_CHAPTER:
 			
-			currentChapterNumber = Integer.parseInt(preferences.getChapterNumber());
-			
-			int bookTotalChapterCount = Integer.parseInt(preferences.getBookTotalChapter());
-			
-			if (currentChapterNumber < bookTotalChapterCount) {
-				currentChapterNumber ++;
-				
-				preferences.setChapterNumber("" + currentChapterNumber);
-				preferences.commit();
-				
-				readBible();
-			} else {
-				Toast.makeText(getApplicationContext(), R.string.alert_last_chapter_already, Toast.LENGTH_SHORT).show();
+			preferences.moveToNextChapter();
+
+			if (preferences.getPreferenceMessage() != null) {
+				Toast.makeText(getApplicationContext(), preferences.getPreferenceMessage(), Toast.LENGTH_SHORT).show();
+				preferences.resetPreferenceMessage();
 			}
+			
+			readBible();
 			
 			break;
 		case MENU_BIBLE_VERSION_HHB:
@@ -281,11 +276,7 @@ public class BibleMainActivity extends Activity {
 		
 		} catch(Exception e) {
 			Toast.makeText(getApplicationContext(), R.string.alert_generic_error_msg, Toast.LENGTH_LONG).show();
-			preferences.setChapterNumber("1");
-			preferences.setBibleVersion("hhb");
-            preferences.setBookNumber("01");
-            
-			preferences.commit();
+			preferences.reset();
 		}
 	}
 }

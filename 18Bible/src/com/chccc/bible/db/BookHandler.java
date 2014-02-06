@@ -372,4 +372,44 @@ public class BookHandler extends SQLiteOpenHelper {
         return books;
         
     }
+    
+    public BookDTO getBookByBookNumber(String bookNumber) {
+
+        // select query
+        String sql = "";
+        sql += "SELECT * FROM " + tableName;
+        sql += " WHERE " + fieldNumber + " = '" + bookNumber + "'";
+        sql += " ORDER BY " + fieldId + " DESC";
+        sql += " LIMIT 0,5";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // execute the query
+        Cursor cursor = db.rawQuery(sql, null);
+
+        int recCount = cursor.getCount();
+        
+        BookDTO book = null;
+        
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            String name = cursor.getString(cursor.getColumnIndex(fieldName));
+            String searchString = cursor.getString(cursor.getColumnIndex(fieldSearchString));
+            String number = cursor.getString(cursor.getColumnIndex(fieldNumber));
+            String testament= cursor.getString(cursor.getColumnIndex(fieldTestament));
+            String chapterCount = cursor.getString(cursor.getColumnIndex(fieldChapterCount));
+            String initialString = cursor.getString(cursor.getColumnIndex(fieldInitialString));
+            
+            
+            book = new BookDTO(name, searchString, number, testament, chapterCount, initialString);
+
+                
+        }
+
+        cursor.close();
+        db.close();
+
+        return book;
+        
+    }
 }
