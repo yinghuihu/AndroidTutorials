@@ -44,6 +44,14 @@ public class BibleDate {
 	}
 	
 	
+	public static int totalDaysToTheDay (String d) {
+		int thisYear = removeLeadingZero (d.substring(6, 10));
+		int thisMonth = removeLeadingZero (d.substring(0, 2));
+		int dayOfMonth = removeLeadingZero (d.substring(3, 5));
+		
+		return totalDaysToTheDay(thisYear, thisMonth, dayOfMonth);
+	}
+	
 	/*
 	 * Get an integer value for the chosen day is the n'th day of the year
 	 */

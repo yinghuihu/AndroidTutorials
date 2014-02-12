@@ -1,7 +1,5 @@
 package com.chccc.bible;
 
-import java.util.ArrayList;
-
 import com.chccc.bible.db.BookHandler;
 import com.chccc.bible.dto.BookDTO;
 
@@ -14,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class BibleBookChapterChooserActivity extends Activity implements OnClickListener{
@@ -45,6 +44,13 @@ public class BibleBookChapterChooserActivity extends Activity implements OnClick
 		bookChapterChooserContainer = (TableLayout)findViewById(R.id.bookChapterChooserContainer);
 		bookChapterChooserContainer.removeAllViews();
 		
+		TextView  tv= new TextView(this);
+		tv.setText(book.getName());
+		tv.setTextSize(30);
+		
+		TableRow trt = new TableRow(this);
+		trt.addView(tv);
+		bookChapterChooserContainer.addView(trt);
 		
 		
 		TableRow tr = new TableRow(this);

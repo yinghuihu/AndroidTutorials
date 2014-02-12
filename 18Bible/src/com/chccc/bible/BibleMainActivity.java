@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.chccc.bible.db.BookHandler;
 import com.chccc.bible.dto.ChapterDTO;
 import com.chccc.bible.dto.VerseDTO;
+import com.chccc.bible.plan.ReadBiblePlan2014;
+import com.chccc.bible.plan.ReadPlanInterface;
 import com.chccc.bible.util.BibleMainActivityPreferences;
 
 import android.os.Bundle;
@@ -14,7 +16,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -64,8 +65,6 @@ public class BibleMainActivity extends Activity {
 		setContentView(R.layout.bible_activity_main);
 		txtChapterHeader = (TextView) findViewById(R.id.txtChapterHeader);
 		bibleContainer = (LinearLayout) findViewById(R.id.bibleContainer );
-		
-		
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public class BibleMainActivity extends Activity {
 		hhbMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 				
 		nivMenu = menu.add(0, this.MENU_BIBLE_VERSION_NIV, 0, this.getString(R.string.menu_text_bible_version_niv));
-		nivMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//		nivMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		
 		mixMenu = menu.add(0, this.MENU_BIBLE_VERSION_MIX, 0, this.getString(R.string.menu_text_bible_version_mix));
 		mixMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -139,6 +138,11 @@ public class BibleMainActivity extends Activity {
 			
 			break;
 		case MENU_BIBLE_VERSION_HHB:
+			
+//			ReadPlanInterface plan = new ReadBiblePlan2014();
+//			ArrayList alResult = plan.getChaptersByDate(BibleMainActivity.this, "12/31/2014");
+//			String s = "";
+			
 			preferences.setBibleVersion("hhb");
 			preferences.commit();
 			readBible();
@@ -226,14 +230,20 @@ public class BibleMainActivity extends Activity {
 		txtChapterHeader.setTextSize(30);
 		txtChapterHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
 		
-		if (version.equalsIgnoreCase("hhb") || version.equalsIgnoreCase("mix")) {
+		if (version.equalsIgnoreCase("hhb")) {
 			txtChapterHeader.setText(chapterHhb.getBookChineseName() + " - 第" + chapterNumber + "章");	
-			nivMenu.setVisible(true);
 			hhbMenu.setVisible(false);
+			mixMenu.setVisible(true);
+			
+		} else if (version.equalsIgnoreCase("mix")) {
+			txtChapterHeader.setText(chapterHhb.getBookChineseName() + " - 第" + chapterNumber + "章");	
+			hhbMenu.setVisible(true);
+			mixMenu.setVisible(false);
+		
 		} else if (version.equalsIgnoreCase("niv")) {
 			txtChapterHeader.setText(chapterHhb.getBookEnglishName() + " - Chapter " + chapterNumber);
 			hhbMenu.setVisible(true);
-			nivMenu.setVisible(false);
+			mixMenu.setVisible(true);
 		}
 		
 //		bibleContainer.addView(textViewBookHeader);
