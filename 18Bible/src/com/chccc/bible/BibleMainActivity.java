@@ -16,8 +16,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.view.MotionEventCompat;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -25,6 +30,7 @@ import android.widget.Toast;
 
 public class BibleMainActivity extends Activity {
 	
+	 private GestureDetectorCompat mDetector; 
 	public static BibleMainActivityPreferences preferences;
 	
 	public final static int MENU_BIBLE_CHAPTER = 1; 
@@ -62,7 +68,10 @@ public class BibleMainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.bible_activity_main);
+		
+//		mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 		txtChapterHeader = (TextView) findViewById(R.id.txtChapterHeader);
 		bibleContainer = (LinearLayout) findViewById(R.id.bibleContainer );
 	}
@@ -275,6 +284,8 @@ public class BibleMainActivity extends Activity {
 		}
 		
 		TextView textChapterContent = new TextView(this);
+		
+		textChapterContent.setFreezesText(false);
 		textChapterContent.setTextSize(fontSize +4);
 		textChapterContent.setText(chapterContent);
 		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
@@ -289,4 +300,30 @@ public class BibleMainActivity extends Activity {
 			preferences.reset();
 		}
 	}
+
+//	@Override
+//	public boolean onTouchEvent(MotionEvent event) {
+//		 this.mDetector.onTouchEvent(event);
+//	        return super.onTouchEvent(event);
+//	}
+//	
+//	class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+//        private static final String DEBUG_TAG = "Gestures"; 
+//        
+//        @Override
+//        public boolean onDown(MotionEvent event) { 
+//            Log.d(DEBUG_TAG,"onDown: " + event.toString()); 
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean onFling(MotionEvent event1, MotionEvent event2, 
+//                float velocityX, float velocityY) {
+//            Log.d(DEBUG_TAG, "onFling: " + event1.toString()+event2.toString());
+//            return true;
+//        }
+//        
+//        
+//    }
+
 }

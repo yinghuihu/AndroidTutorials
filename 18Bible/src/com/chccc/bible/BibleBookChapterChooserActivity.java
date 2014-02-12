@@ -48,8 +48,13 @@ public class BibleBookChapterChooserActivity extends Activity implements OnClick
 		tv.setText(book.getName());
 		tv.setTextSize(30);
 		
+		
+		
+		TableRow.LayoutParams params = new TableRow.LayoutParams();
+		params.span = button_per_row;
+		
 		TableRow trt = new TableRow(this);
-		trt.addView(tv);
+		trt.addView(tv, 0, params);
 		bookChapterChooserContainer.addView(trt);
 		
 		
