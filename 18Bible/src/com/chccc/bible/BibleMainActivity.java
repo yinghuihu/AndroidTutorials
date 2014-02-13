@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 public class BibleMainActivity extends Activity {
 	
-	 private GestureDetectorCompat mDetector; 
+	private GestureDetectorCompat mDetector; 
 	public static BibleMainActivityPreferences preferences;
 	
 	public final static int MENU_BIBLE_CHAPTER = 1; 
@@ -45,8 +45,6 @@ public class BibleMainActivity extends Activity {
 	public final static int MENU_BIBLE_OLD_TESTAMENT = 12;
 	public final static int MENU_BIBLE_NEW_TESTAMENT = 13;
 	
-	private static int fontSize = 18; 
-	
 	TextView txtChapterHeader = null;
 	
 	MenuItem hhbMenu = null;
@@ -58,10 +56,6 @@ public class BibleMainActivity extends Activity {
 	MenuItem nextMenu = null;
 	
 	public final static String EXTRA_MESSAGE = "com.chccc.bible.BibleMainActivity.MESSAGE";
-
-	public static void setFontSize(int fontSize) {
-		BibleMainActivity.fontSize = fontSize;
-	}
 
 	LinearLayout bibleContainer ;
 	
@@ -236,8 +230,8 @@ public class BibleMainActivity extends Activity {
 		}
 		
 		
-		txtChapterHeader.setTextSize(30);
-		txtChapterHeader.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
+		txtChapterHeader.setTextSize(preferences.getFontSizeHeader());
+		txtChapterHeader.setBackgroundColor(Color.parseColor(this.getString(R.color.bible_header_gray)));
 		
 		if (version.equalsIgnoreCase("hhb")) {
 			txtChapterHeader.setText(chapterHhb.getBookChineseName() + " - 第" + chapterNumber + "章");	
@@ -286,7 +280,7 @@ public class BibleMainActivity extends Activity {
 		TextView textChapterContent = new TextView(this);
 		
 		textChapterContent.setFreezesText(false);
-		textChapterContent.setTextSize(fontSize +4);
+		textChapterContent.setTextSize(preferences.getFontSizeText());
 		textChapterContent.setText(chapterContent);
 		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
 		textChapterContent.setTypeface(face);
