@@ -282,7 +282,7 @@ public class BibleMainActivity extends Activity {
 		textChapterContent.setFreezesText(false);
 		textChapterContent.setTextSize(preferences.getFontSizeText());
 		textChapterContent.setText(chapterContent);
-		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
+		Typeface face = Typeface.createFromAsset(getAssets(), preferences.getFontFamily());
 		textChapterContent.setTypeface(face);
 		bibleContainer.addView(textChapterContent);
 		

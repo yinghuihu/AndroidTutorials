@@ -55,6 +55,8 @@ public final class R {
         public static final int buttonChapterChooserSave=0x7f090008;
         public static final int fragmentContainer=0x7f090000;
         public static final int icon=0x7f09000b;
+        public static final int menu_new_testament=0x7f090010;
+        public static final int menu_old_testament=0x7f09000f;
         public static final int scrollView1=0x7f090002;
         public static final int textChapterChooserChapterNumber=0x7f090007;
         public static final int textView1=0x7f090004;
@@ -73,27 +75,30 @@ public final class R {
     }
     public static final class menu {
         public static final int main=0x7f080000;
+        public static final int menu_bible=0x7f080001;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
-        public static final int alert_chapter_number_exceed_max=0x7f060010;
-        public static final int alert_dialog_notok_button_text=0x7f06000f;
-        public static final int alert_dialog_ok_button_text=0x7f06000e;
-        public static final int alert_dialog_title=0x7f06000d;
-        public static final int alert_first_chapter_already=0x7f060011;
-        public static final int alert_generic_error_msg=0x7f060013;
-        public static final int alert_last_chapter_already=0x7f060012;
+        public static final int alert_chapter_number_exceed_max=0x7f060012;
+        public static final int alert_dialog_notok_button_text=0x7f060011;
+        public static final int alert_dialog_ok_button_text=0x7f060010;
+        public static final int alert_dialog_title=0x7f06000f;
+        public static final int alert_first_chapter_already=0x7f060013;
+        public static final int alert_generic_error_msg=0x7f060015;
+        public static final int alert_last_chapter_already=0x7f060014;
         public static final int app_name=0x7f060000;
-        public static final int fragment_hymnheader_list_title=0x7f060014;
+        public static final int fragment_hymnheader_list_title=0x7f060016;
         public static final int menu_new_testament=0x7f060007;
         public static final int menu_old_testament=0x7f060006;
-        public static final int menu_text_bible_version_hhb=0x7f06000a;
-        public static final int menu_text_bible_version_mix=0x7f06000c;
-        public static final int menu_text_bible_version_niv=0x7f06000b;
+        public static final int menu_text_bible_version_hhb=0x7f06000c;
+        public static final int menu_text_bible_version_mix=0x7f06000e;
+        public static final int menu_text_bible_version_niv=0x7f06000d;
         public static final int menu_text_choose_bible=0x7f060005;
-        public static final int menu_text_next_chapter=0x7f060008;
-        public static final int menu_text_previous_chapter=0x7f060009;
+        public static final int menu_text_next_chapter=0x7f06000a;
+        public static final int menu_text_previous_chapter=0x7f06000b;
         public static final int text_chapter_number_input=0x7f060002;
+        public static final int text_new_testament=0x7f060009;
+        public static final int text_old_testament=0x7f060008;
         public static final int text_view_chapter_chooser_book_name_text=0x7f060003;
         public static final int text_view_chapter_chooser_chapter_number_text=0x7f060004;
     }

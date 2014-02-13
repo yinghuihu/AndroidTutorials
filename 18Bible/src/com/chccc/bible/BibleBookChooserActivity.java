@@ -8,27 +8,27 @@ import com.chccc.bible.dto.BookDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class BibleBookChooserActivity extends Activity implements OnClickListener{
+	
+	private final int BUTTONS_PER_ROW =5;
+	
+	String testament = "";
 	
 	TableLayout bookChooserContainer;
 	
 	public BookHandler bookHandler;
+	
 	private ArrayList<BookDTO> books;
-	
-	private int button_per_row =5;
-	
-	private static int fontSize = 22; 
 	
 	public final static String EXTRA_MESSAGE = "com.chccc.bible.BookChapterChooser.MESSAGE";
 	
@@ -40,9 +40,9 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 		
 		Intent intent = getIntent();
 
-		String testament = intent.getStringExtra(BibleMainActivity.EXTRA_MESSAGE);
+		testament = intent.getStringExtra(BibleMainActivity.EXTRA_MESSAGE);
 		
-		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/STKAITI.TTF");
+		Typeface face = Typeface.createFromAsset(getAssets(), BibleMainActivity.preferences.getFontFamily());
 		
 		bookHandler = new BookHandler(BibleBookChooserActivity.this);
 		books = bookHandler.getBooks(testament);	
@@ -54,13 +54,12 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 		TextView  tv= new TextView(this);
 		
 		if (testament.equals(BookHandler.OLD_TESTAMENT)) {
-			tv.setText("旧约");
+			tv.setText(R.string.text_old_testament);
 		} else {
-			tv.setText("新约");
+			tv.setText(R.string.text_new_testament);
 		}
 		
-		tv.setTextSize(30);
-//		tvold.setBackgroundColor(Color.parseColor(this.getString(R.string.color_hymn_header)));
+		tv.setTextSize(BibleMainActivity.preferences.getFontSizeHeader());
 		
 		TableRow trt = new TableRow(this);
 		trt.addView(tv);
@@ -71,18 +70,17 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 		TableRow tr = new TableRow(this);
 		for (BookDTO book: books) {
 			
-			if (bookCount % button_per_row ==0) {
+			if (bookCount % BUTTONS_PER_ROW ==0) {
 				tr = new TableRow(this);
 				bookChooserContainer.addView(tr);
 			}
 			
 			Button btn = new Button(this);
 			
-			
 			btn.setText(book.getInitialString());
 			
 			btn.setTypeface(face);
-			btn.setTextSize(fontSize);
+			btn.setTextSize(BibleMainActivity.preferences.getFontSizeText()-4);
 			btn.setOnClickListener(this);
 			
 			tr.addView(btn);
@@ -90,13 +88,47 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 			bookCount++;
 		}
 	}
-
 	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.menu_bible, menu);
+		
+		if (testament.equals(BookHandler.OLD_TESTAMENT)) {
+			MenuItem oldMenu = menu.getItem(0);
+			oldMenu.setVisible(false);
+		} else {
+			MenuItem newMenu = menu.getItem(1);
+			newMenu.setVisible(false);
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		super.onMenuItemSelected(featureId, item);
+		
+		switch (item.getItemId()){
+		
+		case R.id.menu_old_testament:
+			Intent intentOld = new Intent(this, BibleBookChooserActivity.class);
+			intentOld.putExtra(BibleMainActivity.EXTRA_MESSAGE, BookHandler.OLD_TESTAMENT);
+			this.startActivity(intentOld);
+			
+			this.finish();
+			
+			break;
+		case R.id.menu_new_testament:
+			Intent intentNew = new Intent(this, BibleBookChooserActivity.class);
+			intentNew.putExtra(BibleMainActivity.EXTRA_MESSAGE, BookHandler.NEW_TESTAMENT);
+			this.startActivity(intentNew);
+			
+			this.finish();
+			break;
+		}
+			
 		return true;
 	}
 
@@ -106,10 +138,8 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 		Button btn = (Button) v;
 		
 		String initialString = btn.getText().toString();
-//		BookDTO book = bookHandler.getBookByInitialString(initialString);
 		
 		Intent intent = new Intent(this, BibleBookChapterChooserActivity.class);
-
 
 		// Add the text to the intent
 		intent.putExtra(EXTRA_MESSAGE, initialString);
@@ -118,6 +148,5 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 		startActivity(intent);
 		
 		finish();
-		
     }
 }
