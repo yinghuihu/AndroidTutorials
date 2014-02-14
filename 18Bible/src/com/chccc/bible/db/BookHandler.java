@@ -288,7 +288,30 @@ public class BookHandler extends SQLiteOpenHelper {
         return book;
         
     }
+    
+    public boolean isIntialized() {
 
+        // select query
+        String sql = "";
+        sql += "SELECT * FROM " + tableName;
+        sql += " ORDER BY " + fieldId + " DESC";
+        sql += " LIMIT 0,5";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // execute the query
+        Cursor cursor = db.rawQuery(sql, null);
+
+      if (cursor ==null || cursor.getCount() == 0) {
+    	  db.close();
+    	  return false;
+      } else {
+    	  cursor.close();
+    	  db.close();
+    	  return true;
+      }
+
+    }
     
     public BookDTO getBookByInitialString(String initialString) {
 
