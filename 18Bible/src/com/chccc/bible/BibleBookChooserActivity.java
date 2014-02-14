@@ -7,6 +7,8 @@ import com.chccc.bible.dto.BookDTO;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.Menu;
@@ -80,7 +82,7 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 			btn.setText(book.getInitialString());
 			
 			btn.setTypeface(face);
-			btn.setTextSize(BibleMainActivity.preferences.getFontSizeText()-4);
+			btn.setTextSize(BibleMainActivity.preferences.getFontSizeText()-2);
 			btn.setOnClickListener(this);
 			
 			tr.addView(btn);
@@ -89,6 +91,12 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 		}
 	}
 	
+	@Override
+	public void onBackPressed() {
+		Intent intentNew = new Intent(this, BibleMainActivity.class);
+		this.startActivity(intentNew);
+		this.finish();
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

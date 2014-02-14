@@ -16,7 +16,7 @@ public class BibleMainActivityPreferences {
 	private String bookNumber = "";
 	private String chapterNumber = "";
 	
-	private int fontSizeText = 22;
+	private int fontSizeText = 20;
 	
 	public int getFontSizeText() {
 		return fontSizeText;

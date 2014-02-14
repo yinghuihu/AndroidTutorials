@@ -33,27 +33,10 @@ public class BibleMainActivity extends Activity {
 	private GestureDetectorCompat mDetector; 
 	public static BibleMainActivityPreferences preferences;
 	
-	public final static int MENU_BIBLE_CHAPTER = 1; 
-	
-	public final static int MENU_BIBLE_VERSION_MIX = 7;
-	public final static int MENU_BIBLE_VERSION_HHB = 8;
-	public final static int MENU_BIBLE_VERSION_NIV= 9;
-	
-	public final static int MENU_BIBLE_NEXT_CHAPTER = 10;
-	public final static int MENU_BIBLE_PREVIOUS_CHAPTER = 11;
-	
-	public final static int MENU_BIBLE_OLD_TESTAMENT = 12;
-	public final static int MENU_BIBLE_NEW_TESTAMENT = 13;
-	
 	TextView txtChapterHeader = null;
 	
 	MenuItem hhbMenu = null;
-	MenuItem nivMenu = null;
 	MenuItem mixMenu = null;
-	MenuItem oldMenu = null;
-	MenuItem newMenu = null;
-	MenuItem previousMenu = null;
-	MenuItem nextMenu = null;
 	
 	public final static String EXTRA_MESSAGE = "com.chccc.bible.BibleMainActivity.MESSAGE";
 
@@ -72,32 +55,9 @@ public class BibleMainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		
-		MenuItem chapterChooserMenu = menu.add(0, this.MENU_BIBLE_CHAPTER, 0, this.getString(R.string.menu_text_choose_bible));
-//		chapterChooserMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
-		previousMenu = menu.add(0, this.MENU_BIBLE_PREVIOUS_CHAPTER, 0, this.getString(R.string.menu_text_previous_chapter));
-		previousMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		
-		nextMenu = menu.add(0, this.MENU_BIBLE_NEXT_CHAPTER, 0, this.getString(R.string.menu_text_next_chapter));
-		nextMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		
-		
-		hhbMenu = menu.add(0, this.MENU_BIBLE_VERSION_HHB, 0, this.getString(R.string.menu_text_bible_version_hhb));
-		hhbMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-				
-		nivMenu = menu.add(0, this.MENU_BIBLE_VERSION_NIV, 0, this.getString(R.string.menu_text_bible_version_niv));
-//		nivMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		
-		mixMenu = menu.add(0, this.MENU_BIBLE_VERSION_MIX, 0, this.getString(R.string.menu_text_bible_version_mix));
-		mixMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		
-		oldMenu = menu.add(0, this.MENU_BIBLE_OLD_TESTAMENT, 0, this.getString(R.string.menu_old_testament));
-//		oldMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		
-		newMenu = menu.add(0, this.MENU_BIBLE_NEW_TESTAMENT, 0, this.getString(R.string.menu_new_testament));
-//		newMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		getMenuInflater().inflate(R.menu.main, menu);
+		hhbMenu = menu.getItem(2);
+		mixMenu = menu.getItem(3);
 		
 		readBible();
 		return true;
@@ -108,15 +68,14 @@ public class BibleMainActivity extends Activity {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		super.onMenuItemSelected(featureId, item);
 		
-		int currentChapterNumber = 0;
-		
 		switch (item.getItemId()){
 		
-		case MENU_BIBLE_CHAPTER:
+		case R.id.menu_chapter_chooser:
 			Intent intent = new Intent(this, BibleChapterChooserActivity.class);
 			this.startActivity(intent);
+			this.finish();
 			break;
-		case MENU_BIBLE_PREVIOUS_CHAPTER:
+		case R.id.menu_previous_chapter:
 			
 			preferences.moveToPreviousChapter();
 
@@ -128,7 +87,7 @@ public class BibleMainActivity extends Activity {
 			readBible();
 			
 			break;
-		case MENU_BIBLE_NEXT_CHAPTER:
+		case R.id.menu_next_chapter:
 			
 			preferences.moveToNextChapter();
 
@@ -140,38 +99,36 @@ public class BibleMainActivity extends Activity {
 			readBible();
 			
 			break;
-		case MENU_BIBLE_VERSION_HHB:
-			
-//			ReadPlanInterface plan = new ReadBiblePlan2014();
-//			ArrayList alResult = plan.getChaptersByDate(BibleMainActivity.this, "12/31/2014");
-//			String s = "";
-			
+		case R.id.menu_version_hhb:
 			preferences.setBibleVersion("hhb");
 			preferences.commit();
 			readBible();
 			break;
-		case MENU_BIBLE_VERSION_MIX:
+		case R.id.menu_version_mix:
 			preferences.setBibleVersion("mix");
 			preferences.commit();
 			readBible();
 			break;
-		case MENU_BIBLE_VERSION_NIV:
+		case R.id.menu_version_niv:
 			preferences.setBibleVersion("niv");
 			preferences.commit();
 			readBible();
 			break;
-		case MENU_BIBLE_OLD_TESTAMENT: 
+		case R.id.menu_old_testament1: 
 			Intent intentOld = new Intent(this, BibleBookChooserActivity.class);
 			intentOld.putExtra(EXTRA_MESSAGE, BookHandler.OLD_TESTAMENT);
 			this.startActivity(intentOld);
+			this.finish();
 			break;
 			
-		case MENU_BIBLE_NEW_TESTAMENT: 
+		case R.id.menu_new_testament1: 
 			Intent intentNew = new Intent(this, BibleBookChooserActivity.class);
 			intentNew.putExtra(EXTRA_MESSAGE, BookHandler.NEW_TESTAMENT);
 			this.startActivity(intentNew);
+			this.finish();
 			break;
 		}
+		
 		
 		return true;
 	}

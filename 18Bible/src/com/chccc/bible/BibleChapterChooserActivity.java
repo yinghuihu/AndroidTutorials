@@ -7,9 +7,11 @@ import com.chccc.bible.dto.BookDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -71,6 +73,38 @@ public class BibleChapterChooserActivity extends Activity {
 		 buttonChapterChooserSave = (Button) findViewById(R.id.buttonChapterChooserSave);
 		textChapterChooserChapterNumber = (EditText)findViewById(R.id.textChapterChooserChapterNumber);
 		
+		textChapterChooserChapterNumber.setOnKeyListener(new OnKeyListener()
+		{
+		    
+
+			@Override
+			public boolean onKey(View arg0, int keyCode, KeyEvent event) {
+				  if (event.getAction() == KeyEvent.ACTION_DOWN)
+			        {
+			            switch (keyCode)
+			            {
+			                case KeyEvent.KEYCODE_DPAD_CENTER:
+			                case KeyEvent.KEYCODE_ENTER:
+
+			    				BookDTO book = sef.bookHandler.getBook(textView.getText().toString());
+			    				
+//			    				BibleMainActivity.preferences.setBibleVersion("hhb");
+			                    BibleMainActivity.preferences.setBookNumber(book.getNumber());
+			                    BibleMainActivity.preferences.setChapterNumber(textChapterChooserChapterNumber.getText().toString());
+			                    BibleMainActivity.preferences.commit();
+			    				Intent intent = new Intent(sef, BibleMainActivity.class);
+			    	    		startActivity(intent);
+			    				finish();
+			                	return true;
+			                default:
+			                    break;
+			            }
+			        }
+			        return false;
+			}
+		});
+		
+		
 		buttonChapterChooserSave.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -81,7 +115,7 @@ public class BibleChapterChooserActivity extends Activity {
 				
 				BookDTO book = sef.bookHandler.getBook(textView.getText().toString());
 				
-				BibleMainActivity.preferences.setBibleVersion("hhb");
+//				BibleMainActivity.preferences.setBibleVersion("hhb");
                 BibleMainActivity.preferences.setBookNumber(book.getNumber());
                 BibleMainActivity.preferences.setChapterNumber(textChapterChooserChapterNumber.getText().toString());
                 BibleMainActivity.preferences.commit();
@@ -95,11 +129,16 @@ public class BibleChapterChooserActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+//		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
-	
+	@Override
+	public void onBackPressed() {
+		Intent intentNew = new Intent(this, BibleMainActivity.class);
+		this.startActivity(intentNew);
+		this.finish();
+	}
 	    
 	
 }

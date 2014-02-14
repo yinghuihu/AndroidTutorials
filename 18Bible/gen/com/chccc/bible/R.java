@@ -46,7 +46,6 @@ public final class R {
         public static final int list_item_icon2=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000f;
         public static final int bibleContainer=0x7f090004;
         public static final int bookChapterChooserContainer=0x7f09000a;
         public static final int bookChooserContainer=0x7f09000b;
@@ -56,8 +55,16 @@ public final class R {
         public static final int buttonChapterChooserSave=0x7f090009;
         public static final int fragmentContainer=0x7f090000;
         public static final int icon=0x7f09000c;
-        public static final int menu_new_testament=0x7f090011;
-        public static final int menu_old_testament=0x7f090010;
+        public static final int menu_chapter_chooser=0x7f090013;
+        public static final int menu_new_testament=0x7f090018;
+        public static final int menu_new_testament1=0x7f090016;
+        public static final int menu_next_chapter=0x7f090010;
+        public static final int menu_old_testament=0x7f090017;
+        public static final int menu_old_testament1=0x7f090015;
+        public static final int menu_previous_chapter=0x7f09000f;
+        public static final int menu_version_hhb=0x7f090011;
+        public static final int menu_version_mix=0x7f090012;
+        public static final int menu_version_niv=0x7f090014;
         public static final int scrollView1=0x7f090003;
         public static final int textChapterChooserChapterNumber=0x7f090008;
         public static final int textView1=0x7f090005;

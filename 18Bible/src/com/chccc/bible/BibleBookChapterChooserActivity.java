@@ -69,7 +69,7 @@ public class BibleBookChapterChooserActivity extends Activity implements OnClick
 			Button btn = new Button(this);
 			btn.setText(i + "");
 			btn.setTypeface(face);
-			btn.setTextSize(BibleMainActivity.preferences.getFontSizeText()-4);
+			btn.setTextSize(BibleMainActivity.preferences.getFontSizeText()-2);
 			
 			btn.setOnClickListener(this);
 			
@@ -85,6 +85,13 @@ public class BibleBookChapterChooserActivity extends Activity implements OnClick
 		return true;
 	}
 
+	@Override
+	public void onBackPressed() {
+		Intent intentNew = new Intent(this, BibleMainActivity.class);
+		this.startActivity(intentNew);
+		this.finish();
+	}
+	
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		super.onMenuItemSelected(featureId, item);
