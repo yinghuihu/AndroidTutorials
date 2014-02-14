@@ -44,11 +44,13 @@ public class BibleChapterChooserActivity extends Activity {
 		
 		bookHandler = new BookHandler(BibleChapterChooserActivity.this);
 		
+		String bookNumber = BibleMainActivity.preferences.getBookNumber();
 		// put data to database
-		bookHandler.insertBookData();
+		BookDTO book = bookHandler.getBookByBookNumber(bookNumber);
 		
 		BookDTO[] books = new BookDTO[0];
 		textView = (CustomAutoCompleteView) findViewById(R.id.bookJumpNumber);
+		textView.setText(book.getName());
 		 
 		textView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
 		
