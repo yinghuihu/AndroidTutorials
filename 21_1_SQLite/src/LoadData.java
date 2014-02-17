@@ -125,7 +125,7 @@ public class LoadData {
 			sql += fieldVersion + " TEXT, ";
 			sql += fieldBookNumber + " TEXT, ";
 			sql += fieldContent + " TEXT, ";
-			sql += fieldLineNumber + " TEXT, ";
+			sql += fieldLineNumber + " INTEGER, ";
 			sql += fieldChapterNumber + " TEXT ";
 			sql += " ); ";
 
@@ -238,7 +238,7 @@ public class LoadData {
 
 				stmt = c.createStatement();
 				String sql = "INSERT INTO %s (%s, %s, %s, %s, %s) "
-						+ "VALUES ('%s', '%s', '%s', '%s', '%s' );";
+						+ "VALUES ('%s', '%s', '%s', %s, '%s' );";
 
 				sql = String.format(sql, tableName, fieldVersion, fieldBookNumber, fieldChapterNumber,  fieldLineNumber, fieldContent, 
 						version, bookNumber, chapterNumber, verse.getVerseIndex(), verse.getVerseContent().replaceAll("'", "''"));
