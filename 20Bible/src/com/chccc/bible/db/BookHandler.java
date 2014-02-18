@@ -45,20 +45,21 @@ public class BookHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String sql = "";
-
-        sql += "CREATE TABLE " + tableName;
-        sql += " ( ";
-        sql += fieldId + " INTEGER PRIMARY KEY AUTOINCREMENT, ";
-        sql += fieldName + " TEXT, ";
-        sql += fieldSearchString + " TEXT, ";
-        sql += fieldNumber + " TEXT, ";
-        sql += fieldTestament + " TEXT, ";
-        sql += fieldChapterCount + " TEXT, ";
-        sql += fieldInitialString + " TEXT ";
-        sql += " ) ";
-
-        db.execSQL(sql);
+    	
+//        String sql = "";
+//
+//        sql += "CREATE TABLE " + tableName;
+//        sql += " ( ";
+//        sql += fieldId + " INTEGER PRIMARY KEY AUTOINCREMENT, ";
+//        sql += fieldName + " TEXT, ";
+//        sql += fieldSearchString + " TEXT, ";
+//        sql += fieldNumber + " TEXT, ";
+//        sql += fieldTestament + " TEXT, ";
+//        sql += fieldChapterCount + " TEXT, ";
+//        sql += fieldInitialString + " TEXT ";
+//        sql += " ) ";
+//
+//        db.execSQL(sql);
         
 //        insertBookData();
 
@@ -141,10 +142,10 @@ public class BookHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        String sql = "DROP TABLE IF EXISTS " + tableName;
-        db.execSQL(sql);
-
-        onCreate(db);
+//        String sql = "DROP TABLE IF EXISTS " + tableName;
+//        db.execSQL(sql);
+//
+//        onCreate(db);
     }
 
     /*

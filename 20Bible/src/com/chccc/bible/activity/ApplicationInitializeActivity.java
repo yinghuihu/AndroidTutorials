@@ -1,7 +1,14 @@
 package com.chccc.bible.activity;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import com.chccc.bible.R;
 import com.chccc.bible.db.BookHandler;
+import com.chccc.bible.db.DataBaseHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -24,11 +31,17 @@ public class ApplicationInitializeActivity extends Activity  implements OnClickL
 		buttonApplicationInitialize = (Button) findViewById(R.id.buttonApplicationInitialize);
 		buttonApplicationInitialize.setOnClickListener(this);
 		
-		bookHandler = new BookHandler(ApplicationInitializeActivity.this);
-		if (bookHandler.isIntialized()) {
+		try {
+			createDatabase();
+//		bookHandler = new BookHandler(ApplicationInitializeActivity.this);
+//		if (bookHandler.isIntialized()) {
 			Intent intentNew = new Intent(this, BibleMainActivity.class);
 			this.startActivity(intentNew);
 			this.finish();
+		//}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
@@ -45,10 +58,15 @@ public class ApplicationInitializeActivity extends Activity  implements OnClickL
     public void onClick(View v) {
 		
 		// put data to database
-		bookHandler.insertBookData();
-		
-		Intent intentNew = new Intent(this, BibleMainActivity.class);
-		this.startActivity(intentNew);
-		this.finish();
+//		bookHandler.insertBookData();
+//		
+//		Intent intentNew = new Intent(this, BibleMainActivity.class);
+//		this.startActivity(intentNew);
+//		this.finish();
     }
+	
+	
+	private void createDatabase()throws IOException {
+		DataBaseHelper dbHelper = new DataBaseHelper(this);
+	}
 }

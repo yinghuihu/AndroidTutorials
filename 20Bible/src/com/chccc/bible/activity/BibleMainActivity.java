@@ -9,6 +9,7 @@ import com.chccc.bible.R.layout;
 import com.chccc.bible.R.menu;
 import com.chccc.bible.R.string;
 import com.chccc.bible.db.BookHandler;
+import com.chccc.bible.db.VerseHandler;
 import com.chccc.bible.dto.BookDTO;
 import com.chccc.bible.dto.ChapterDTO;
 import com.chccc.bible.dto.VerseDTO;
@@ -194,38 +195,35 @@ public class BibleMainActivity extends Activity {
 		String bookNumber = preferences.getBookNumber();
 		String chapterNumber = preferences.getChapterNumber();
 		
-		ChapterDTO chapterHhb = ChapterXmlParser.getChapterContent(getApplicationContext(), "hhb", bookNumber, chapterNumber);
-		ChapterDTO chapterNiv = ChapterXmlParser.getChapterContent(getApplicationContext(), "niv", bookNumber, chapterNumber);
-
+		
+		bookHandler = new BookHandler(BibleMainActivity.this);
+		book = bookHandler.getBookByBookNumber(bookNumber);
+		
+		VerseHandler verseHandler = new VerseHandler(this);
+		
+		preferences.setBookTotalChapter(book.getChapterCount());
+		preferences.commit();
+		
 		//validate the chapter choosen
 		int bookTotalChapterCount = Integer.parseInt(preferences.getBookTotalChapter());
-		if (Integer.parseInt(chapterNumber) > bookTotalChapterCount) {
-			 preferences.setChapterNumber("1");
-			 preferences.commit();
-			 
-			 chapterNumber = "1";
-			 chapterHhb = ChapterXmlParser.getChapterContent(getApplicationContext(), "hhb", bookNumber, "1");
-			 chapterNiv = ChapterXmlParser.getChapterContent(getApplicationContext(), "niv", bookNumber, "1");
-			 
-			 Toast.makeText(getApplicationContext(), R.string.alert_chapter_number_exceed_max, Toast.LENGTH_LONG).show();
-		}
+	
 		
 		
 		txtChapterHeader.setTextSize(preferences.getFontSizeHeader());
 		txtChapterHeader.setBackgroundColor(Color.parseColor(this.getString(R.color.bible_header_gray)));
 		
 		if (version.equalsIgnoreCase("hhb")) {
-			txtChapterHeader.setText(chapterHhb.getBookChineseName() + " - 第" + chapterNumber + "章");	
+			txtChapterHeader.setText(book.getName() + " - 第" + chapterNumber + "章");	
 			hhbMenu.setVisible(false);
 			mixMenu.setVisible(true);
 			
 		} else if (version.equalsIgnoreCase("mix")) {
-			txtChapterHeader.setText(chapterHhb.getBookChineseName() + " - 第" + chapterNumber + "章");	
+			txtChapterHeader.setText(book.getName() + " - 第" + chapterNumber + "章");	
 			hhbMenu.setVisible(true);
 			mixMenu.setVisible(false);
 		
 		} else if (version.equalsIgnoreCase("niv")) {
-			txtChapterHeader.setText(chapterHhb.getBookEnglishName() + " - Chapter " + chapterNumber);
+			txtChapterHeader.setText(book.getName()+ " - Chapter " + chapterNumber);
 			hhbMenu.setVisible(true);
 			mixMenu.setVisible(true);
 		}
@@ -234,8 +232,8 @@ public class BibleMainActivity extends Activity {
 		
 		String chapterContent = "";
 		
-		ArrayList<VerseDTO> versesHhb = chapterHhb.getVerses();
-		ArrayList<VerseDTO> versesNiv = chapterNiv.getVerses();
+		ArrayList<VerseDTO> versesHhb = verseHandler.getChapterVerses(chapterNumber, bookNumber, "hhb");
+		ArrayList<VerseDTO> versesNiv = verseHandler.getChapterVerses(chapterNumber, bookNumber, "niv");;
 		
 //		for (String verse: verses) {
 //			chapterContent = chapterContent + verse;
