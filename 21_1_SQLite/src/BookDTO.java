@@ -2,6 +2,8 @@
 
 public class BookDTO {
 	private String name;
+	private String nameEN;
+	
 	private String searchString;
 	private String number;
 	
@@ -17,6 +19,14 @@ public class BookDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getNameEN() {
+		return nameEN;
+	}
+	public void setNameEN(String nameEN) {
+		this.nameEN = nameEN;
+	}
+	
 	public String getSearchString() {
 		return searchString;
 	}
@@ -30,8 +40,9 @@ public class BookDTO {
 		this.number = number;
 	}
 	
-	public BookDTO(String name, String searchString, String number, String testament, String chapterCount, String initialString) {
+	public BookDTO(String name, String nameEN, String searchString, String number, String testament, String chapterCount, String initialString) {
 		this.name= name;
+		this.nameEN = nameEN;
 		this.searchString = searchString;
 		this.number = number;
 		this.testament = testament;
