@@ -68,7 +68,7 @@ public class VerseHandler extends SQLiteOpenHelper {
         sql += " WHERE " + fieldChapterNumber + " = '" + chapterNumber + "'";
         sql += " AND " + fieldBookNumber + " = '" + bookNumber + "'";
         sql += " AND " + fieldVersion + " = '" + version + "'";
-        sql += " ORDER BY " + fieldId + " ASC";
+        sql += " ORDER BY " + fieldLineNumber + " ASC";
 //        sql += " LIMIT 0,5";
 
         SQLiteDatabase db = this.getWritableDatabase();
