@@ -28,12 +28,17 @@
     
     <string name="btn_intialize">初始化</string>
     
-    <string name="setting_font_size_header_caption">Set Header Font Size</string>
-    <string name="setting_font_size_header_title">Set Header Font Size</string>
-    <string name="setting_font_size_header_description">Set Header Font Size</string>
     
-    <string name="setting_font_size_textview_caption">Set TextView Font Size1</string>
-    <string name="setting_font_size_textview_title">Set TextView Font Size2</string>
-    <string name="setting_font_size_textview_description">Set TextView Font Size3</string>
+    <string name="setting_font_size_caption">设置字体大小</string>
+    
+    <string name="setting_font_size_header_title">标题字体</string>
+    <string name="setting_font_size_header_description">设置标题字体大小</string>
+    
+    
+    <string name="setting_font_size_textview_title">圣经正文字体</string>
+    <string name="setting_font_size_textview_description">设置文本字体大小</string>
+    
+    <string name="setting_font_size_chapterChooser_title">圣经章节选取字体</string>
+    <string name="setting_font_size_chapterChooser_description">设置章节选取字体大小</string>
 
 </resources>

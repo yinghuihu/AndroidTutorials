@@ -9,6 +9,10 @@ package com.chccc.bible;
 
 public final class R {
     public static final class array {
+        public static final int fontSizeChapterChooserOptions=0x7f050004;
+        public static final int fontSizeChapterChooserOptionsValues=0x7f050005;
+        public static final int fontSizeHeaderOptions=0x7f050002;
+        public static final int fontSizeHeaderOptionsValues=0x7f050003;
         public static final int fontSizeTextViewOptions=0x7f050000;
         public static final int fontSizeTextViewOptionsValues=0x7f050001;
     }
@@ -110,12 +114,13 @@ public final class R {
         public static final int menu_text_choose_bible=0x7f080004;
         public static final int menu_text_next_chapter=0x7f080009;
         public static final int menu_text_previous_chapter=0x7f08000a;
-        public static final int setting_font_size_header_caption=0x7f080017;
+        public static final int setting_font_size_caption=0x7f080017;
+        public static final int setting_font_size_chapterChooser_description=0x7f08001d;
+        public static final int setting_font_size_chapterChooser_title=0x7f08001c;
         public static final int setting_font_size_header_description=0x7f080019;
         public static final int setting_font_size_header_title=0x7f080018;
-        public static final int setting_font_size_textview_caption=0x7f08001a;
-        public static final int setting_font_size_textview_description=0x7f08001c;
-        public static final int setting_font_size_textview_title=0x7f08001b;
+        public static final int setting_font_size_textview_description=0x7f08001b;
+        public static final int setting_font_size_textview_title=0x7f08001a;
         public static final int text_chapter_number_input=0x7f080001;
         public static final int text_new_testament=0x7f080008;
         public static final int text_old_testament=0x7f080007;

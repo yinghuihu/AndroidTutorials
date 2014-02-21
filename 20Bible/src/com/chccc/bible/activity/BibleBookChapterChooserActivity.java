@@ -73,7 +73,7 @@ public class BibleBookChapterChooserActivity extends Activity implements OnClick
 			Button btn = new Button(this);
 			btn.setText(i + "");
 			btn.setTypeface(face);
-			btn.setTextSize(BibleMainActivity.preferences.getFontSizeText()-2);
+			btn.setTextSize(BibleMainActivity.preferences.getFontSizeChapterChooser());
 			
 			btn.setOnClickListener(this);
 			

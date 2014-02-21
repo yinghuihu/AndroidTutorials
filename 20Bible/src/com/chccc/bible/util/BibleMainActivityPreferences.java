@@ -18,8 +18,14 @@ public class BibleMainActivityPreferences {
 	
 	private int fontSizeText = 20;
 	
+	private int fontSizeChapterChooser = 18;
+	
+	public int getFontSizeChapterChooser() {
+		return Integer.parseInt(settings.getString("prefFontSizeChapterChooser", "18"));
+	}
+
 	public int getFontSizeText() {
-		return Integer.parseInt(settings.getString("prefTextViewFontSize", "20"));
+		return Integer.parseInt(settings.getString("prefFontSizeTextView", "20"));
 	}
 
 //	public void setFontSizeText(int fontSizeText) {
@@ -42,12 +48,12 @@ public class BibleMainActivityPreferences {
 	private int fontSizeHeader = 30;
 	
 	public int getFontSizeHeader() {
-		return fontSizeHeader;
+		return Integer.parseInt(settings.getString("prefFontSizeHeader", "30"));
 	}
 
-	public void setFontSizeHeader(int fontSizeHeader) {
-		this.fontSizeHeader = fontSizeHeader;
-	}
+//	public void setFontSizeHeader(int fontSizeHeader) {
+//		this.fontSizeHeader = fontSizeHeader;
+//	}
 
 	private String preferenceMessage = null;
 	

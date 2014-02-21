@@ -87,7 +87,7 @@ public class BibleBookChooserActivity extends Activity implements OnClickListene
 			btn.setText(book.getInitialString());
 			
 			btn.setTypeface(face);
-			btn.setTextSize(BibleMainActivity.preferences.getFontSizeText()-2);
+			btn.setTextSize(BibleMainActivity.preferences.getFontSizeChapterChooser());
 			btn.setOnClickListener(this);
 			
 			tr.addView(btn);
