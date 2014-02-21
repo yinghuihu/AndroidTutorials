@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+ 
+    <PreferenceCategory android:title="@string/setting_font_size_textview_caption"  >
+      
+        <ListPreference
+            android:key="prefTextViewFontSize"
+            android:entries="@array/fontSizeTextViewOptions"
+            android:summary="@string/setting_font_size_textview_title"
+            android:entryValues="@array/fontSizeTextViewOptionsValues"
+            android:title="@string/setting_font_size_textview_description" />
+    </PreferenceCategory>
+ 
+</PreferenceScreen>

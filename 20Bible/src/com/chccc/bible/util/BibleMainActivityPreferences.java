@@ -19,12 +19,12 @@ public class BibleMainActivityPreferences {
 	private int fontSizeText = 20;
 	
 	public int getFontSizeText() {
-		return fontSizeText;
+		return Integer.parseInt(settings.getString("prefTextViewFontSize", "20"));
 	}
 
-	public void setFontSizeText(int fontSizeText) {
-		this.fontSizeText = fontSizeText;
-	}
+//	public void setFontSizeText(int fontSizeText) {
+//		this.fontSizeText = fontSizeText;
+//	}
 
 	private String fontFamily = "fonts/STKAITI.TTF";
 	

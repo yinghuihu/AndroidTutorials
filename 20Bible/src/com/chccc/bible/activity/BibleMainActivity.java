@@ -2,6 +2,7 @@ package com.chccc.bible.activity;
 
 import java.util.ArrayList;
 
+import com.chccc.bible.activity.SettingsActivity;
 import com.chccc.bible.R;
 import com.chccc.bible.R.color;
 import com.chccc.bible.R.id;
@@ -38,6 +39,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BibleMainActivity extends Activity {
+	
+	private static final int RESULT_SETTINGS = 1;
 	
 	private GestureDetectorCompat mDetector; 
 	public static BibleMainActivityPreferences preferences;
@@ -152,12 +155,27 @@ public class BibleMainActivity extends Activity {
 			this.startActivity(intentNew);
 			this.finish();
 			break;
+		case R.id.menu_settings:
+			 Intent intentSettings = new Intent(this, SettingsActivity.class);
+	         startActivityForResult(intentSettings, RESULT_SETTINGS);
+	         break;
 		}
 		
 		
 		return true;
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode) {
+		case RESULT_SETTINGS:
+			readBible();
+			break;
+		}
+
+	}
 	
 	@Override
 	public void onBackPressed() {
