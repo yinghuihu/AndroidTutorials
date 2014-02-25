@@ -1,28 +1,21 @@
 package com.chccc.bible.dto;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
-import android.content.Context;
-
-
 public class VerseDTO {
 	
 	private String verseContent;
-	private String verseIndex;
+	private String verseLineNumber;
+	
+	private String chapterNumber;
+	
+	private String bookNumber;
 	
 	
-	public VerseDTO(String verseContent, String verseIndex) {
+	
+	public VerseDTO(String verseContent, String verseLineNumber, String chapterNumber, String bookNumber) {
 		this.verseContent = verseContent;
-		this.verseIndex = verseIndex;
+		this.verseLineNumber = verseLineNumber;
+		this.chapterNumber = chapterNumber;
+		this.bookNumber = bookNumber;
 	}
 	
 	public String getVerseContent() {
@@ -31,11 +24,29 @@ public class VerseDTO {
 	public void setVerseContent(String verseContent) {
 		this.verseContent = verseContent;
 	}
-	public String getVerseIndex() {
-		return verseIndex;
+
+	public String getVerseLineNumber() {
+		return verseLineNumber;
 	}
-	public void setVerseIndex(String verseIndex) {
-		this.verseIndex = verseIndex;
+
+	public void setVerseLineNumber(String verseLineNumber) {
+		this.verseLineNumber = verseLineNumber;
+	}
+
+	public String getChapterNumber() {
+		return chapterNumber;
+	}
+
+	public void setChapterNumber(String chapterNumber) {
+		this.chapterNumber = chapterNumber;
+	}
+
+	public String getBookNumber() {
+		return bookNumber;
+	}
+
+	public void setBookNumber(String bookNumber) {
+		this.bookNumber = bookNumber;
 	}
 	
 	

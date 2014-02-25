@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import com.chccc.bible.dto.BookDTO;
 import com.chccc.bible.dto.VerseDTO;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class VerseHandler extends SQLiteOpenHelper {
 
@@ -86,9 +84,8 @@ public class VerseHandler extends SQLiteOpenHelper {
 
                 String content = cursor.getString(cursor.getColumnIndex(fieldContent));
                 String lineNumber= cursor.getString(cursor.getColumnIndex(fieldLineNumber));
-                String number = cursor.getString(cursor.getColumnIndex(fieldLineNumber));
                 
-                VerseDTO verse = new VerseDTO(content, lineNumber);
+                VerseDTO verse = new VerseDTO(content, lineNumber, chapterNumber, bookNumber);
 
                 verses.add(verse);
                 
@@ -150,9 +147,11 @@ public class VerseHandler extends SQLiteOpenHelper {
 
                 String content = cursor.getString(cursor.getColumnIndex(fieldContent));
                 String lineNumber= cursor.getString(cursor.getColumnIndex(fieldLineNumber));
-                String number = cursor.getString(cursor.getColumnIndex(fieldLineNumber));
+                String chapterNumber = cursor.getString(cursor.getColumnIndex(fieldChapterNumber));
+                String bookNumber = cursor.getString(cursor.getColumnIndex(fieldBookNumber));
                 
-                VerseDTO verse = new VerseDTO(content, lineNumber);
+                
+                VerseDTO verse = new VerseDTO(content, lineNumber, chapterNumber, bookNumber);
 
                 verses.add(verse);
                 

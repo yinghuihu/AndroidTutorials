@@ -26,7 +26,7 @@
 			
 			
 ***********************
-* Table book         *
+* Table book          *
 ***********************
 			String tableName = "book";
 

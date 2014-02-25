@@ -260,15 +260,15 @@ public class BibleMainActivity extends Activity {
 		for (int i=0; i< versesHhb.size(); i++) {
 			if (version.equalsIgnoreCase("hhb")) {
 				VerseDTO versehhb = versesHhb.get(i);
-				chapterContent = chapterContent + versehhb.getVerseIndex() + "\n" + versehhb.getVerseContent() + "\n\n";
+				chapterContent = chapterContent + versehhb.getVerseLineNumber() + "\n" + versehhb.getVerseContent() + "\n\n";
 				
 			} else  if (version.equalsIgnoreCase("niv")) {
 				VerseDTO verseniv = versesNiv.get(i);
-				chapterContent = chapterContent + verseniv.getVerseIndex() + "\n" + verseniv.getVerseContent() + "\n\n";
+				chapterContent = chapterContent + verseniv.getVerseLineNumber() + "\n" + verseniv.getVerseContent() + "\n\n";
 			} else  if (version.equalsIgnoreCase("mix")) {
 				VerseDTO versehhb = versesHhb.get(i);
 				VerseDTO verseniv = versesNiv.get(i);
-				chapterContent = chapterContent + versehhb.getVerseIndex() + "\n" + versehhb.getVerseContent() + "\n";
+				chapterContent = chapterContent + versehhb.getVerseLineNumber() + "\n" + versehhb.getVerseContent() + "\n";
 				chapterContent = chapterContent + verseniv.getVerseContent() + "\n\n";
 				
 			}
@@ -277,6 +277,7 @@ public class BibleMainActivity extends Activity {
 		TextView textChapterContent = new TextView(this);
 		
 		textChapterContent.setFreezesText(false);
+		textChapterContent.setTextIsSelectable(true);
 		textChapterContent.setTextSize(preferences.getFontSizeText());
 		textChapterContent.setText(chapterContent);
 		Typeface face = Typeface.createFromAsset(getAssets(), preferences.getFontFamily());
