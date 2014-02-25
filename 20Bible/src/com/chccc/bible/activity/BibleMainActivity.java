@@ -60,6 +60,8 @@ public class BibleMainActivity extends Activity {
 	
 	String bookNumber =null;
 	
+	TextView textChapterContent;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -158,6 +160,9 @@ public class BibleMainActivity extends Activity {
 		case R.id.menu_settings:
 			 Intent intentSettings = new Intent(this, SettingsActivity.class);
 	         startActivityForResult(intentSettings, RESULT_SETTINGS);
+	         break;
+		case R.id.menu_share:
+			 shareIt();
 	         break;
 		}
 		
@@ -274,7 +279,7 @@ public class BibleMainActivity extends Activity {
 			}
 		}
 		
-		TextView textChapterContent = new TextView(this);
+		textChapterContent = new TextView(this);
 		
 		textChapterContent.setFreezesText(false);
 		textChapterContent.setTextIsSelectable(true);
@@ -293,6 +298,24 @@ public class BibleMainActivity extends Activity {
 		}
 	}
 
+	private void shareIt() {
+        
+          String selectedText = textChapterContent.getText().toString().substring(textChapterContent.getSelectionStart(), textChapterContent.getSelectionStart());
+
+          //if no text is selected share the entire text area.
+          if(selectedText.length() == 0){
+             
+              String dataToShare = textChapterContent.getText().toString();
+              selectedText = dataToShare;
+          }
+
+          //Share the text
+          Intent sendIntent = new Intent(); 
+          sendIntent.setAction(Intent.ACTION_SEND); 
+          sendIntent.putExtra(Intent.EXTRA_TEXT, selectedText); 
+          sendIntent.setType("text/plain"); 
+          startActivity(sendIntent);
+	}
 //	@Override
 //	public boolean onTouchEvent(MotionEvent event) {
 //		 this.mDetector.onTouchEvent(event);
