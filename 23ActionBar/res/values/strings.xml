@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Action Bar</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Home page</string>
+    <string name="action_search">search</string>
+    <string name="action_location_found">location found</string>
+    <string name="action_refresh">refresh</string>
+    <string name="action_help">help</string>
+    <string name="action_check_updates">Check update</string>
+    <string name="title_activity_location_found">LocationFound</string>
+
+</resources>
