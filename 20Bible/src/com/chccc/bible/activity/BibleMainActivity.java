@@ -29,10 +29,15 @@ import android.graphics.Typeface;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -61,6 +66,8 @@ public class BibleMainActivity extends Activity {
 	String bookNumber =null;
 	
 	TextView textChapterContent;
+	
+	protected Object mActionMode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +169,8 @@ public class BibleMainActivity extends Activity {
 	         startActivityForResult(intentSettings, RESULT_SETTINGS);
 	         break;
 		case R.id.menu_share:
-			 shareIt();
+			String selectedText = textChapterContent.getText().toString().substring(textChapterContent.getSelectionStart(), textChapterContent.getSelectionStart());
+			 shareIt(selectedText);
 	         break;
 		}
 		
@@ -229,8 +237,6 @@ public class BibleMainActivity extends Activity {
 		
 		//validate the chapter choosen
 		int bookTotalChapterCount = Integer.parseInt(preferences.getBookTotalChapter());
-	
-		
 		
 		txtChapterHeader.setTextSize(preferences.getFontSizeHeader());
 		txtChapterHeader.setBackgroundColor(Color.parseColor(this.getString(R.color.bible_header_gray)));
@@ -281,6 +287,7 @@ public class BibleMainActivity extends Activity {
 		
 		textChapterContent = new TextView(this);
 		
+		textChapterContent.setCustomSelectionActionModeCallback(mActionModeCallback);
 		textChapterContent.setFreezesText(false);
 		textChapterContent.setTextIsSelectable(true);
 		textChapterContent.setTextSize(preferences.getFontSizeText());
@@ -298,12 +305,9 @@ public class BibleMainActivity extends Activity {
 		}
 	}
 
-	private void shareIt() {
+	private void shareIt(String selectedText) {
         
-          String selectedText = textChapterContent.getText().toString().substring(textChapterContent.getSelectionStart(), textChapterContent.getSelectionStart());
-
-          //if no text is selected share the entire text area.
-          if(selectedText.length() == 0){
+           if(selectedText.length() == 0){
              
               String dataToShare = textChapterContent.getText().toString();
               selectedText = dataToShare;
@@ -340,5 +344,46 @@ public class BibleMainActivity extends Activity {
 //        
 //        
 //    }
+
+
+	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+
+	    // Called when the action mode is created; startActionMode() was called
+	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+	      // inflate a menu resource providing context menu items
+	      MenuInflater inflater = mode.getMenuInflater();
+	      // assumes that you have "contexual.xml" menu resources
+	      inflater.inflate(R.menu.menu_context, menu);
+	      return true;
+	    }
+
+	    // called each time the action mode is shown. Always called after
+	    // onCreateActionMode, but
+	    // may be called multiple times if the mode is invalidated.
+	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+	      return false; // Return false if nothing is done
+	    }
+
+		// called when the user selects a contextual menu item
+		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+			switch (item.getItemId()) {
+			case R.id.action_contextual_Share:
+				String selectedText = textChapterContent.getText().toString().substring(textChapterContent.getSelectionStart(), textChapterContent.getSelectionEnd());
+
+		          //if no text is selected share the entire text area.
+		         
+				shareIt(selectedText);
+				//mode.finish(); // Action picked, so close the CAB
+				return true;
+			default:
+				return false;
+			}
+		}
+
+	    // called when the user exits the action mode
+	    public void onDestroyActionMode(ActionMode mode) {
+	      mActionMode = null;
+	    }
+	  };
 
 }

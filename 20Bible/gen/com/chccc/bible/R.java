@@ -51,9 +51,14 @@ public final class R {
     }
     public static final class drawable {
         public static final int bible_launch=0x7f020000;
-        public static final int list_item_icon2=0x7f020001;
+        public static final int ic_action_help=0x7f020001;
+        public static final int ic_action_save=0x7f020002;
+        public static final int ic_action_search=0x7f020003;
+        public static final int ic_action_share=0x7f020004;
+        public static final int list_item_icon2=0x7f020005;
     }
     public static final class id {
+        public static final int action_contextual_Share=0x7f0b001b;
         public static final int bibleContainer=0x7f0b0004;
         public static final int bookChapterChooserContainer=0x7f0b000a;
         public static final int bookChooserContainer=0x7f0b000b;
@@ -95,6 +100,7 @@ public final class R {
     public static final class menu {
         public static final int main=0x7f0a0000;
         public static final int menu_bible=0x7f0a0001;
+        public static final int menu_context=0x7f0a0002;
     }
     public static final class string {
         public static final int alert_chapter_number_exceed_max=0x7f080013;
