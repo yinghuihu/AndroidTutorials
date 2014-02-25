@@ -12,13 +12,13 @@
     <item android:id="@+id/action_location_found"
           android:icon="@drawable/ic_action_location_found"
           android:title="@string/action_location_found"
-          android:showAsAction="ifRoom" />
+          android:showAsAction="always" />
      
     <!-- Refresh -->
     <item android:id="@+id/action_refresh"
           android:icon="@drawable/ic_action_refresh"
           android:title="@string/action_refresh"
-          android:showAsAction="ifRoom" />
+          android:showAsAction="always" />
      
     <!-- Help -->
     <item android:id="@+id/action_help"

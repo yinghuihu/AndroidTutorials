@@ -24,24 +24,31 @@ public final class R {
         public static final int ic_action_android=0x7f020000;
         public static final int ic_action_help=0x7f020001;
         public static final int ic_action_location_found=0x7f020002;
-        public static final int ic_action_refresh=0x7f020003;
-        public static final int ic_action_search=0x7f020004;
-        public static final int ic_action_share=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
+        public static final int ic_action_place=0x7f020003;
+        public static final int ic_action_refresh=0x7f020004;
+        public static final int ic_action_save=0x7f020005;
+        public static final int ic_action_search=0x7f020006;
+        public static final int ic_action_share=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
     }
     public static final class id {
-        public static final int action_check_updates=0x7f090006;
-        public static final int action_help=0x7f090005;
-        public static final int action_location_found=0x7f090003;
-        public static final int action_refresh=0x7f090004;
-        public static final int action_search=0x7f090002;
-        public static final int action_settings=0x7f090001;
-        public static final int txtQuery=0x7f090000;
+        public static final int action_check_updates=0x7f090009;
+        public static final int action_help=0x7f090008;
+        public static final int action_location_found=0x7f090006;
+        public static final int action_refresh=0x7f090007;
+        public static final int action_search=0x7f090005;
+        public static final int action_settings=0x7f090004;
+        public static final int imgIcon=0x7f090002;
+        public static final int progressBar=0x7f090000;
+        public static final int txtQuery=0x7f090001;
+        public static final int txtTitle=0x7f090003;
     }
     public static final class layout {
-        public static final int activity_location_found=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_search_results=0x7f030002;
+        public static final int action_progressbar=0x7f030000;
+        public static final int activity_location_found=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_search_results=0x7f030003;
+        public static final int list_item_title_navigation=0x7f030004;
     }
     public static final class menu {
         public static final int location_found=0x7f080000;
