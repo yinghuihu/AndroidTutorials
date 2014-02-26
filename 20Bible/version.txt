@@ -1,4 +1,5 @@
-3.10 [2/25/2014] - can select and share the text. Also can share the whole chapter without select text firt. 
+3.10 [2/25/2014] - can select and share the text. Also can share the whole chapter without select text first.
+					change the line separator between the verses. 
 
 3.09 [2/21/2014] - use the PreferenceActivity to control the font size of header, textview and chapter chooser. 
 

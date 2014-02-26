@@ -44,6 +44,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BibleMainActivity extends Activity {
+
+	private static final String VERSE_LINENUMBER_SEPARATOR = ": "; 	//The original separator is "\n"
+	private static final String VERSE_LINE_SEPARATOR = "\n\n";
 	
 	private static final int RESULT_SETTINGS = 1;
 	
@@ -68,6 +71,8 @@ public class BibleMainActivity extends Activity {
 	TextView textChapterContent;
 	
 	protected Object mActionMode;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -271,16 +276,16 @@ public class BibleMainActivity extends Activity {
 		for (int i=0; i< versesHhb.size(); i++) {
 			if (version.equalsIgnoreCase("hhb")) {
 				VerseDTO versehhb = versesHhb.get(i);
-				chapterContent = chapterContent + versehhb.getVerseLineNumber() + "\n" + versehhb.getVerseContent() + "\n\n";
+				chapterContent = chapterContent + versehhb.getVerseLineNumber() + VERSE_LINENUMBER_SEPARATOR + versehhb.getVerseContent() + VERSE_LINE_SEPARATOR;
 				
 			} else  if (version.equalsIgnoreCase("niv")) {
 				VerseDTO verseniv = versesNiv.get(i);
-				chapterContent = chapterContent + verseniv.getVerseLineNumber() + "\n" + verseniv.getVerseContent() + "\n\n";
+				chapterContent = chapterContent + verseniv.getVerseLineNumber() + VERSE_LINENUMBER_SEPARATOR + verseniv.getVerseContent() + VERSE_LINE_SEPARATOR;
 			} else  if (version.equalsIgnoreCase("mix")) {
 				VerseDTO versehhb = versesHhb.get(i);
 				VerseDTO verseniv = versesNiv.get(i);
-				chapterContent = chapterContent + versehhb.getVerseLineNumber() + "\n" + versehhb.getVerseContent() + "\n";
-				chapterContent = chapterContent + verseniv.getVerseContent() + "\n\n";
+				chapterContent = chapterContent + versehhb.getVerseLineNumber() +  VERSE_LINENUMBER_SEPARATOR  + versehhb.getVerseContent() + "\n";
+				chapterContent = chapterContent + verseniv.getVerseContent() + VERSE_LINE_SEPARATOR;
 				
 			}
 		}
