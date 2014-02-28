@@ -37,6 +37,16 @@ http://android-ui-utils.googlecode.com/hg/asset-studio/dist/index.html
 
 Labs:
 ================
+Lab 00: resources folder. (development icons)
 
+Lab 20: To test the bible application.
 
 Lab 22: how to use the preference activity to set the shared settings. 
+Lab 23: how to use the action bar.
+
+	> do the search widget in the action bar
+	> do the refresh thing.
+	> has the spinner choices in the action bar. 
+	> in the child action can go back to the home.
+
+Lab 24: how to use the action bar for tab navigation (with swipe).
