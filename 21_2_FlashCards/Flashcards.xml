@@ -20,16 +20,16 @@
 			<Answer>
 				<Line number="1">Message producer sends a message to an exchange along with a routing key. Exchanges are bound to queues in AMQP through what are called bindings</Line>
 				<Line number="2">A binding is a directive indicating what messages should be routed from an exchange to a queue. Message consumer attach to a queue and receive messages from the queue that is bound to an exchange. </Line>
-				<Line number="3"></Line>
+				<Line number="3">JUNK</Line>
 			</Answer>
 		</Question>
 		
 		<Question>
 			<Title>What is consumer driven messaging?</Title>
 			<Answer>
-				<Line number="1"></Line>
-				<Line number="2"></Line>
-				<Line number="3"></Line>
+				<Line number="1">JUNK</Line>
+				<Line number="2">JUNK</Line>
+				<Line number="3">JUNK</Line>
 			</Answer>
 		</Question>
 		<Question>
@@ -68,7 +68,7 @@
 		<Question>
 			<Title>What is the default port number for AMQP </Title>
 			<Answer>
-				<Line number="1">qpid.amqp_port	 \nPort number used for the brokers default AMQP messaging port	 \n"5672"</Line>
+				<Line number="1">qpid.amqp_port	 Port number used for the brokers default AMQP messaging port	 "5672"</Line>
 			</Answer>
 		</Question>
 		
