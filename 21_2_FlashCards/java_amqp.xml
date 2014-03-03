@@ -1,5 +1,5 @@
 <Sets>
-	<Set name="AMQP">
+	<Set name="JAVA - AMQP">
 		<Question>
 			<Title>What is AMQP?</Title>
 			<Answer>

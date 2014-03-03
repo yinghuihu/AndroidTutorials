@@ -17,7 +17,7 @@ public class XmlParserUtil {
 		
 		try {
 			InputStream is = null;
-			is = new FileInputStream (String.format("Flashcards.xml"));
+			is = new FileInputStream (fileName);
 
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
