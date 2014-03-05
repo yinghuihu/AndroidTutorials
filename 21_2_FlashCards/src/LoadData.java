@@ -7,7 +7,8 @@ public class LoadData {
 //		DBHelper.initializeDB();
 		
 		
-		addSet("java_amqp.xml", "电脑");
+//		addSet("java_amqp.xml", "电脑");
+		addSet("java_core.xml", "电脑");
 				
 		System.out.println("ALL DONE");
 	}

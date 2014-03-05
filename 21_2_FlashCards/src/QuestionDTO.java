@@ -21,7 +21,7 @@ public class QuestionDTO {
 	public String getAnswer() {
 		String s = "";
 		for (int i=0; i< lines.size(); i++) {
-			s = s +lines.get(i) + "\n";
+			s = s +lines.get(i) + "\n\n";
 		}
 		
 		return s;
