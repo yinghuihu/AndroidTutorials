@@ -18,6 +18,7 @@ import com.chccc.bible.plan.ReadBiblePlan2014;
 import com.chccc.bible.plan.ReadPlanInterface;
 import com.chccc.bible.util.BibleMainActivityPreferences;
 import com.chccc.bible.util.ChapterXmlParser;
+import com.chccc.bible.util.VersionUtil;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -177,6 +178,9 @@ public class BibleMainActivity extends Activity {
 			String selectedText = textChapterContent.getText().toString().substring(textChapterContent.getSelectionStart(), textChapterContent.getSelectionStart());
 			 shareIt(selectedText);
 	         break;
+		case R.id.menu_version:     
+			Toast.makeText(getApplicationContext(), VersionUtil.getVersionInfo(this)  , Toast.LENGTH_SHORT).show();
+			break;
 		}
 		
 		

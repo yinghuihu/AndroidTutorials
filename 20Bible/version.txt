@@ -1,3 +1,5 @@
+3.11 [6/30/2014] - add the version info to the menu.
+
 3.10 [2/25/2014] - can select and share the text. Also can share the whole chapter without select text first.
 					change the line separator between the verses. 
 
