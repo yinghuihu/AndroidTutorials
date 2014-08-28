@@ -44,7 +44,7 @@
     <string name="setting_font_size_chapterChooser_title">圣经章节选取字体</string>
     <string name="setting_font_size_chapterChooser_description">设置章节选取字体大小</string>
     
-    <string name="version_number">3.10</string>
+    <string name="version_number">3.11--[8/28/2014]</string>
     
 
 </resources>
